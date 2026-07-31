@@ -1,0 +1,137 @@
+/* 문득 공개 웹 — 앱 팔레트(moondeuk-android ui/theme/Color.kt)와 동일 */
+:root {
+  --cream: #f2e8d6;
+  --cream-dark: #ede3cf;
+  --darker-cream: #f7efdf;
+  --camel: #c0894a;
+  --camel-dark: #9a6a30;
+  --text-primary: #2f2616;
+  --text-secondary: #8a7c64;
+  --divider: #efe7d6;
+  --danger: #d96b5c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--text-primary);
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+header.site {
+  padding-top: 16px;
+  margin-bottom: 32px;
+}
+
+header.site a {
+  color: var(--camel-dark);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+h1 {
+  font-size: 26px;
+  margin: 0 0 8px;
+}
+
+h2 {
+  font-size: 19px;
+  margin: 36px 0 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--divider);
+}
+
+p.lead {
+  color: var(--text-secondary);
+  margin-top: 0;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 16px 0;
+  box-shadow: 0 1px 4px rgba(47, 38, 22, 0.08);
+}
+
+.notice {
+  background: var(--darker-cream);
+  border-radius: 14px;
+  padding: 16px 20px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.danger {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+ul {
+  padding-left: 22px;
+}
+
+li {
+  margin: 6px 0;
+}
+
+a {
+  color: var(--camel-dark);
+}
+
+.btn {
+  display: inline-block;
+  background: var(--camel);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 12px;
+  margin: 8px 8px 0 0;
+}
+
+.btn.secondary {
+  background: #fff;
+  color: var(--camel-dark);
+  border: 1px solid var(--cream-dark);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th,
+td {
+  border: 1px solid var(--divider);
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+  background: #fff;
+}
+
+th {
+  background: var(--darker-cream);
+}
+
+footer.site {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--divider);
+  color: var(--text-secondary);
+  font-size: 13px;
+}
