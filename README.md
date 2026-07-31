@@ -9,6 +9,7 @@ GitHub Pages(`main` 루트)로 서빙한다. 빌드 없음 — HTML/CSS 만.
 | `index.html` | 인덱스(앱 소개 + 문서 링크) |
 | `account-deletion.html` | **계정 삭제 안내** — Play Console 데이터 보안 폼의 "계정 삭제 요청 URL"에 기재 |
 | `privacy.html` | **개인정보처리방침** — Play Console 앱 정보의 처리방침 URL에 기재 |
+| `terms.html` | **이용약관** — 앱 로그인 동의 바텀시트의 "이용약관 보기" 링크 대상 |
 
 ## 내용 유지보수 규칙
 
