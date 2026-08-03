@@ -135,3 +135,9 @@ footer.site {
   color: var(--text-secondary);
   font-size: 13px;
 }
+
+/* 표 안의 보조 설명(연락처·단서) */
+.muted {
+  color: #8a7c64;
+  font-size: 0.85em;
+}
