@@ -331,9 +331,10 @@ h1 em {
 }
 
 .step-shot {
-  flex: 0 1 250px;
-  max-width: 250px;
-  border-radius: 22px;
+  flex: 0 1 340px;
+  max-width: 340px;
+  border-radius: 26px;
+  box-shadow: 0 14px 34px rgba(47, 38, 22, 0.12);
 }
 
 /* 망각곡선 — 다크 브라운 섹션 */
@@ -368,9 +369,9 @@ h1 em {
 }
 
 .final-shot {
-  max-width: 230px;
+  max-width: 300px;
   margin: 0 auto 28px;
-  border-radius: 22px;
+  border-radius: 26px;
   box-shadow: 0 16px 36px rgba(47, 38, 22, 0.15);
 }
 
@@ -448,6 +449,11 @@ footer.site a {
 
   .hero-copy {
     margin-top: -8px;
+  }
+
+  .step-shot {
+    flex-basis: auto;
+    max-width: min(320px, 82vw);
   }
 }
 
