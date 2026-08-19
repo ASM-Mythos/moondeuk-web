@@ -131,35 +131,15 @@ h2 {
   border-radius: 999px;
 }
 
-/* Hero — 키비주얼을 전면 배치하고 하단을 페이지 배경으로 페이드 */
+/* Hero — 텍스트 중심 */
 .hero {
-  padding: 0 0 88px;
-  background: var(--paper);
-}
-
-.hero-visual {
-  position: relative;
-}
-
-.hero-visual img {
-  width: 100%;
-}
-
-.hero-visual::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 42%;
-  background: linear-gradient(to bottom, rgba(253, 248, 238, 0) 0%, var(--paper) 94%);
-  pointer-events: none;
+  padding: 96px 24px 88px;
+  background: linear-gradient(var(--cream) 0%, var(--paper) 90%);
 }
 
 .hero-copy {
-  position: relative;
   max-width: 720px;
-  margin: calc(-1 * clamp(28px, 7vw, 110px)) auto 0;
+  margin: 0 auto;
   padding: 0 24px;
   text-align: center;
 }
@@ -440,15 +420,7 @@ footer.site a {
   }
 
   .hero {
-    padding: 0 0 64px;
-  }
-
-  .hero-visual::after {
-    height: 24%;
-  }
-
-  .hero-copy {
-    margin-top: -8px;
+    padding: 56px 20px 64px;
   }
 
   .step-shot {
