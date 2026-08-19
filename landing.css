@@ -131,17 +131,42 @@ h2 {
   border-radius: 999px;
 }
 
-/* Hero — 텍스트 중심 */
+/* Hero — 좌 카피 · 우 폰 (climbx 레이아웃) */
 .hero {
-  padding: 96px 24px 88px;
+  padding: 72px 24px 88px;
   background: linear-gradient(var(--cream) 0%, var(--paper) 90%);
 }
 
-.hero-copy {
-  max-width: 720px;
+.hero-inner {
+  max-width: 1060px;
   margin: 0 auto;
-  padding: 0 24px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+  flex-wrap: wrap;
+}
+
+.hero-copy {
+  flex: 1 1 440px;
+  max-width: 580px;
+  text-align: left;
+}
+
+.hero-copy .cta-group,
+.hero-copy .value-chips {
+  justify-content: flex-start;
+}
+
+.hero-shot {
+  flex: 0 1 340px;
+}
+
+.hero-shot img {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  filter: drop-shadow(0 24px 44px rgba(47, 38, 22, 0.22));
 }
 
 h1 {
@@ -420,7 +445,24 @@ footer.site a {
   }
 
   .hero {
-    padding: 56px 20px 64px;
+    padding: 40px 20px 64px;
+  }
+
+  .hero-copy {
+    text-align: center;
+  }
+
+  .hero-copy .cta-group,
+  .hero-copy .value-chips {
+    justify-content: center;
+  }
+
+  .hero-shot {
+    flex-basis: auto;
+  }
+
+  .hero-shot img {
+    max-width: min(300px, 72vw);
   }
 
   .step-shot {
