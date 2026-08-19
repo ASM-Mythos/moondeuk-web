@@ -1,0 +1,267 @@
+/* 문득 랜딩 — 팔레트는 style.css(앱 Color.kt 동기화)와 동일 토큰 */
+:root {
+  --cream: #f2e8d6;
+  --cream-dark: #ede3cf;
+  --darker-cream: #f7efdf;
+  --camel: #c0894a;
+  --camel-dark: #9a6a30;
+  --text-primary: #2f2616;
+  --text-secondary: #8a7c64;
+  --divider: #efe7d6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--text-primary);
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  line-height: 1.7;
+  font-size: 17px;
+  word-break: keep-all;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+section {
+  padding: 64px 24px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Hero */
+.hero {
+  padding-top: 48px;
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-copy {
+  flex: 1 1 380px;
+  max-width: 480px;
+}
+
+.brand {
+  color: var(--camel-dark);
+  font-weight: 800;
+  font-size: 20px;
+  margin: 0 0 16px;
+}
+
+h1 {
+  font-size: clamp(30px, 6vw, 42px);
+  font-weight: 800;
+}
+
+.sub {
+  margin: 20px 0 28px;
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.sub strong {
+  color: var(--camel-dark);
+}
+
+.hero-shot {
+  flex: 0 1 320px;
+}
+
+.hero-shot img {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  filter: drop-shadow(0 24px 40px rgba(47, 38, 22, 0.18));
+}
+
+/* CTA buttons */
+.cta-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cta-group.center {
+  justify-content: center;
+}
+
+.btn-store {
+  display: inline-block;
+  background: var(--text-primary);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  font-family: inherit;
+  padding: 14px 26px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.btn-store:active {
+  transform: scale(0.97);
+}
+
+.btn-store-soon {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--cream-dark);
+}
+
+.ios-note {
+  margin: 12px 0 0;
+  font-size: 14px;
+  color: var(--camel-dark);
+}
+
+/* Steps */
+.steps {
+  background: var(--darker-cream);
+}
+
+.steps h2 {
+  text-align: center;
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.step {
+  max-width: 880px;
+  margin: 48px auto 0;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.step:nth-child(odd) {
+  flex-direction: row-reverse;
+}
+
+.step-copy {
+  flex: 1 1 340px;
+  max-width: 420px;
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--camel);
+  color: #fff;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.step h3 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.step p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.step-shot {
+  flex: 0 1 260px;
+  max-width: 260px;
+  border-radius: 24px;
+}
+
+/* Why */
+.why {
+  text-align: center;
+}
+
+.why h2 {
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 800;
+  color: var(--camel-dark);
+  margin-bottom: 16px;
+}
+
+.why p {
+  max-width: 560px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+  font-size: 18px;
+}
+
+.why strong {
+  color: var(--text-primary);
+}
+
+/* Final CTA */
+.final {
+  text-align: center;
+  background: var(--darker-cream);
+}
+
+.final img {
+  max-width: 240px;
+  margin: 0 auto 24px;
+  border-radius: 24px;
+}
+
+.final h2 {
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+/* Footer */
+footer.site {
+  padding: 32px 24px 48px;
+  border-top: 1px solid var(--divider);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.foot-inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.foot-brand {
+  margin: 0 0 8px;
+}
+
+footer.site nav {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+footer.site a {
+  color: var(--text-secondary);
+}
