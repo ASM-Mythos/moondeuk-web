@@ -3,93 +3,134 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>문득 — 노트가 퀴즈가 되는 잠금화면 복습</title>
-  <meta name="description" content="열심히 정리한 노트, 다시 펴본 적 있나요? 노트를 올리면 퀴즈가 되고, 잠금화면에서 잊을 때쯤 다시 만나요.">
+  <title>문득 — 당신이 잊을 때쯤, 문득</title>
+  <meta name="description" content="기록은 했지만 다시 보지 않는 당신을 위한 자동 복습 서비스. 노트를 올리면 퀴즈가 되고, 잠금화면에서 잊을 때쯤 다시 만나요.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/app-icon.png">
 
   <!-- 공유 미리보기 (카카오톡·인스타·트위터) -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="문득 — 노트가 퀴즈가 되는 잠금화면 복습">
-  <meta property="og:description" content="열심히 정리한 노트, 다시 펴본 적 있나요? 노트를 올리면 퀴즈가 되고, 잠금화면에서 잊을 때쯤 다시 만나요.">
+  <meta property="og:title" content="문득 — 당신이 잊을 때쯤, 문득">
+  <meta property="og:description" content="기록은 했지만 다시 보지 않는 당신을 위한 자동 복습 서비스. 노트를 올리면 퀴즈가 되고, 잠금화면에서 잊을 때쯤 다시 만나요.">
   <meta property="og:url" content="https://moondeuk.kr/">
-  <meta property="og:image" content="https://moondeuk.kr/assets/screen-lockscreen.png">
+  <meta property="og:image" content="https://moondeuk.kr/assets/hero-keyvisual.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="landing.css">
 </head>
 <body>
 
+  <!-- 스티키 헤더 -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="./">
+        <img src="assets/app-icon.png" alt="" width="28" height="28">
+        <span>문득</span>
+      </a>
+      <a id="cta-play-nav" class="btn-nav" href="#">앱 다운로드</a>
+    </div>
+  </header>
+
   <main>
     <!-- Hero -->
     <section class="hero">
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <p class="brand">문득</p>
-          <h1>열심히 정리한 노트,<br>다시 펴본 적 있나요?</h1>
-          <p class="sub">
-            노트를 올리면 퀴즈가 돼요.<br>
-            폰을 켤 때마다 잠금화면에서,<br>
-            <strong>잊을 때쯤 딱 맞춰</strong> 다시 만나요.
-          </p>
-          <div class="cta-group">
-            <a id="cta-play-hero" class="btn-store" href="#" rel="noopener">Google Play에서 받기</a>
-            <button id="cta-ios-hero" class="btn-store btn-store-soon" type="button">App Store 출시 예정</button>
-          </div>
-          <p id="ios-note" class="ios-note" hidden>iOS 버전을 준비하고 있어요. 조금만 기다려 주세요!</p>
+      <div class="hero-visual reveal">
+        <img src="assets/hero-keyvisual.jpg"
+             alt="당신이 잊을 때쯤, 문득 — 잠금화면 알림과 고양이 마스코트 키비주얼"
+             width="1536" height="1024" fetchpriority="high">
+      </div>
+      <div class="hero-copy reveal">
+        <p class="eyebrow">기록은 했지만, 다시 보지 않는 당신을 위한</p>
+        <h1>당신이 잊을 때쯤, <em>문득</em></h1>
+        <p class="sub">노트를 올리면 퀴즈가 돼요. 폰을 켤 때마다 잠금화면에서,<br class="pc-br">잊을 때쯤 딱 맞춰 다시 만나요.</p>
+        <div class="cta-group">
+          <a id="cta-play-hero" class="btn-store" href="#" rel="noopener">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M3.6 1.8 13.7 12 3.6 22.2c-.4-.3-.6-.8-.6-1.4V3.2c0-.6.2-1.1.6-1.4Zm11.5 8.8 2.6-2.6 3.3 1.9c1 .6 1 1.6 0 2.2l-3.3 1.9-2.6-2.6v-.8ZM5 1.2l11 6.3-2.4 2.4L5 1.2Zm0 21.6 8.6-8.7 2.4 2.4L5 22.8Z"/></svg>
+            Google Play에서 받기
+          </a>
+          <button id="cta-ios-hero" class="btn-store btn-store-soon" type="button">App Store 출시 예정</button>
         </div>
-        <div class="hero-shot">
-          <img src="assets/screen-lockscreen.png" alt="잠금화면 위에 뜬 문득 복습 퀴즈" width="400" height="600" fetchpriority="high">
-        </div>
+        <p id="ios-note" class="ios-note" hidden>iOS 버전을 준비하고 있어요. 조금만 기다려 주세요!</p>
+        <ul class="value-chips">
+          <li>노션 · PDF 그대로 연동</li>
+          <li>퀴즈는 자동 생성</li>
+          <li>복습은 잠금화면에서</li>
+        </ul>
       </div>
     </section>
 
-    <!-- 3 steps -->
+    <!-- 공감 -->
+    <section class="empathy">
+      <div class="section-inner">
+        <p class="eyebrow reveal">혹시 이런 적 있나요?</p>
+        <h2 class="reveal">열심히 정리한 노트,<br>다시 펴본 적 있나요?</h2>
+        <div class="bubbles">
+          <p class="bubble reveal">"필기는 열심히 했는데, 시험 전날에야 처음 다시 봐요"</p>
+          <p class="bubble right reveal">"복습해야지 마음먹어도 뭘 다시 봐야 할지 모르겠어요"</p>
+          <p class="bubble reveal">"퀴즈로 외우면 좋다던데… 만들 시간에 그냥 외우고 말죠"</p>
+        </div>
+        <p class="empathy-close reveal">그 노트, <strong>문득이 다시 가져올게요.</strong></p>
+      </div>
+    </section>
+
+    <!-- 3 스텝 -->
     <section class="steps">
-      <h2>공부 방식은 그대로,<br>복습만 저절로</h2>
+      <div class="section-inner">
+        <p class="eyebrow reveal">문득이 하는 일</p>
+        <h2 class="reveal">공부 방식은 그대로,<br>복습만 저절로</h2>
 
-      <div class="step">
-        <div class="step-copy">
-          <span class="step-num">1</span>
-          <h3>노트를 그대로 가져와요</h3>
-          <p>노션 페이지를 연결하거나 PDF·마크다운 파일을 올리면 끝. 정리하던 방식을 바꿀 필요 없어요.</p>
+        <div class="step reveal">
+          <div class="step-copy">
+            <span class="step-num">STEP 1</span>
+            <h3>노트를 그대로 가져와요</h3>
+            <p>노션 페이지를 연결하거나 PDF·마크다운 파일을 올리면 끝. 정리하던 방식을 바꿀 필요 없어요.</p>
+          </div>
+          <img class="step-shot" src="assets/screen-import.png" alt="노션 연동과 파일 업로드 화면" width="340" height="510" loading="lazy">
         </div>
-        <img class="step-shot" src="assets/screen-import.png" alt="노션 연동과 파일 업로드 화면" width="340" height="510" loading="lazy">
-      </div>
 
-      <div class="step">
-        <div class="step-copy">
-          <span class="step-num">2</span>
-          <h3>퀴즈는 문득이 만들어요</h3>
-          <p>자료마다 나만의 문제집이 생겨요. 문제 만드느라 애쓸 필요 없어요.</p>
+        <div class="step reveal">
+          <div class="step-copy">
+            <span class="step-num">STEP 2</span>
+            <h3>퀴즈는 문득이 만들어요</h3>
+            <p>자료마다 나만의 문제집이 생겨요. 문제 만드느라 애쓸 필요 없어요.</p>
+          </div>
+          <img class="step-shot" src="assets/screen-workbook.png" alt="자료마다 자동 생성된 문제집 화면" width="340" height="510" loading="lazy">
         </div>
-        <img class="step-shot" src="assets/screen-workbook.png" alt="자료마다 자동 생성된 문제집 화면" width="340" height="510" loading="lazy">
-      </div>
 
-      <div class="step">
-        <div class="step-copy">
-          <span class="step-num">3</span>
-          <h3>잠금화면에서 풀기만 하면 끝</h3>
-          <p>앱을 열 필요도, 복습 시간을 따로 낼 필요도 없어요. 폰을 켜는 순간이 복습 시간이 돼요.</p>
+        <div class="step reveal">
+          <div class="step-copy">
+            <span class="step-num">STEP 3</span>
+            <h3>잠금화면에서 풀기만 하면 끝</h3>
+            <p>앱을 열 필요도, 복습 시간을 따로 낼 필요도 없어요. 폰을 켜는 순간이 복습 시간이 돼요.</p>
+          </div>
+          <img class="step-shot" src="assets/screen-lockscreen-flip.png" alt="잠금화면에서 퀴즈를 푸는 화면" width="340" height="510" loading="lazy">
         </div>
-        <img class="step-shot" src="assets/screen-lockscreen-flip.png" alt="잠금화면에서 퀴즈를 푸는 화면" width="340" height="510" loading="lazy">
       </div>
     </section>
 
-    <!-- Forgetting curve -->
+    <!-- 망각곡선 -->
     <section class="why">
-      <h2>잊을 때쯤, 문득</h2>
-      <p>
-        사람은 하루만 지나도 배운 것의 절반을 잊어요.<br>
-        문득은 문제 하나하나 <strong>잊어갈 때쯤</strong>을 계산해 다시 보여줘요.<br>
-        맞힐수록 간격은 길어지고, 기억은 오래 남아요.
-      </p>
+      <div class="section-inner">
+        <p class="eyebrow reveal">왜 "잊을 때쯤"인가요?</p>
+        <h2 class="reveal">기억이 흐려질 때,<br>내가 찾아갈게요</h2>
+        <p class="why-body reveal">
+          사람은 하루만 지나도 배운 것의 절반을 잊어요.<br>
+          문득은 문제 하나하나 <strong>잊어갈 때쯤</strong>을 계산해 다시 보여줘요.<br>
+          맞힐수록 간격은 길어지고, 기억은 오래 남아요.
+        </p>
+      </div>
     </section>
 
     <!-- Final CTA -->
     <section class="final">
-      <img src="assets/screen-home.png" alt="문득 홈 화면 — 오늘의 복습과 연속 기록" width="340" height="510" loading="lazy">
-      <h2>오늘 정리한 노트,<br>이제 다시 만나요</h2>
-      <div class="cta-group center">
-        <a id="cta-play-final" class="btn-store" href="#" rel="noopener">Google Play에서 받기</a>
+      <div class="section-inner reveal">
+        <img class="final-shot" src="assets/screen-home.png" alt="문득 홈 화면 — 오늘의 복습과 연속 기록" width="300" height="450" loading="lazy">
+        <h2>지금 문득을 시작해보세요</h2>
+        <p class="sub">기억은 흐려져도, 배움은 계속돼요.</p>
+        <div class="cta-group center">
+          <a id="cta-play-final" class="btn-store" href="#" rel="noopener">Google Play에서 받기</a>
+        </div>
       </div>
     </section>
   </main>
@@ -106,6 +147,11 @@
       </nav>
     </div>
   </footer>
+
+  <!-- 모바일 하단 고정 CTA -->
+  <div class="cta-bar">
+    <a id="cta-play-bar" class="btn-store" href="#" rel="noopener">Google Play에서 받기</a>
+  </div>
 
   <!-- PostHog (앱과 동일 프로젝트 — 클라 공개 키) -->
   <script>
@@ -133,7 +179,7 @@
         .join('&');
       var playUrl = PLAY_BASE + '&referrer=' + encodeURIComponent(referrerStr);
 
-      ['cta-play-hero', 'cta-play-final'].forEach(function (id) {
+      ['cta-play-nav', 'cta-play-hero', 'cta-play-final', 'cta-play-bar'].forEach(function (id) {
         var el = document.getElementById(id);
         el.href = playUrl;
         el.addEventListener('click', function () {
@@ -145,6 +191,23 @@
         posthog.capture('landing_store_click', { store: 'app_store_waitlist', placement: 'cta-ios-hero' });
         document.getElementById('ios-note').hidden = false;
       });
+
+      // 스크롤 등장 애니메이션 — 모션 최소화 설정이면 즉시 표시
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var targets = document.querySelectorAll('.reveal');
+      if (reduced || !('IntersectionObserver' in window)) {
+        targets.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      targets.forEach(function (el) { io.observe(el); });
     })();
   </script>
 </body>
