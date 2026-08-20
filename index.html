@@ -18,6 +18,41 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="landing.css">
+
+  <!-- FAQ 리치 결과용 구조화 데이터 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "잠금화면 복습은 어떻게 작동하나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "안드로이드 잠금화면 위에 퀴즈 카드가 떠요. 폰을 켤 때 한 문제만 풀고 넘어가면 돼요. 앱을 열 필요도, 알림을 누를 필요도 없어요." }
+      },
+      {
+        "@type": "Question",
+        "name": "노션 페이지로 정말 퀴즈를 만들 수 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "네. 노션 페이지를 연결하거나 PDF·마크다운 파일을 올리면 AI가 내용을 읽고 퀴즈를 자동으로 만들어드려요. 전공 필기, 자격증 요약본까지 텍스트 자료라면 대부분 가능해요." }
+      },
+      {
+        "@type": "Question",
+        "name": "망각곡선 복습이 뭔가요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "사람은 배운 지 하루 만에 절반 이상을 잊는다는 에빙하우스의 연구에서 나온 개념이에요. 잊어갈 때쯤 다시 보면 기억이 오래가는데, 문득은 그 타이밍을 문제마다 자동으로 계산해요." }
+      },
+      {
+        "@type": "Question",
+        "name": "무료로 써볼 수 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "문득은 구독제로 운영돼요. 지금 가입하면 무료 이용 기회 5번을 드리니, 부담 없이 먼저 써보고 결정하세요." }
+      },
+      {
+        "@type": "Question",
+        "name": "아이폰(iOS)에서도 쓸 수 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "지금은 안드로이드(Google Play)에서 먼저 만나볼 수 있어요. iOS 버전은 열심히 준비하고 있으니 조금만 기다려 주세요." }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -33,12 +68,19 @@
   </header>
 
   <main>
-    <!-- Hero -->
+    <!-- Hero — 데스크톱에선 트랙을 스크롤하는 동안 핀 고정, 문구가 스크롤에 따라 전환 -->
+    <div class="hero-track" id="hero-track">
     <section class="hero">
       <div class="hero-inner">
         <div class="hero-copy reveal">
           <p class="eyebrow">기록은 했지만, 다시 보지 않는 당신을 위한</p>
-          <h1>당신이 잊을 때쯤,<br><em>문득</em> 찾아오는 복습</h1>
+          <h1>
+            <span class="rotator" id="hero-rotator">
+              <span class="phrase is-on">당신이 잊을 때쯤,</span>
+              <span class="phrase">폰을 켜는 순간마다,</span>
+              <span class="phrase">시험이 코앞에 오기 전에,</span>
+            </span><br><em>문득</em> 찾아오는 복습
+          </h1>
           <p class="sub">노트를 올리면 퀴즈가 돼요. 폰을 켤 때마다 잠금화면에서,<br class="pc-br">잊을 때쯤 딱 맞춰 다시 만나요.</p>
           <div class="cta-group">
             <a id="cta-play-hero" class="btn-store" href="#" rel="noopener">
@@ -48,18 +90,30 @@
             <button id="cta-ios-hero" class="btn-store btn-store-soon" type="button">App Store 출시 예정</button>
           </div>
           <p id="ios-note" class="ios-note" hidden>iOS 버전을 준비하고 있어요. 조금만 기다려 주세요!</p>
-          <ul class="value-chips">
-            <li>노션 · PDF 그대로 연동</li>
-            <li>퀴즈는 자동 생성</li>
-            <li>복습은 잠금화면에서</li>
-          </ul>
         </div>
         <div class="hero-shot reveal">
-          <iframe class="screen-demo hero-demo" src="demo/screen-hero.html"
+          <iframe class="screen-demo hero-demo" width="340" height="680" src="demo/screen-hero.html"
                   title="잠금화면에서 문득 퀴즈를 풀고 정답을 확인하는 화면" scrolling="no"></iframe>
+          <!-- 기능 요약 카드 — 데스크톱: 폰 주위 플로팅 / 모바일: 칩 행. 색은 아래 기능 섹션과 1:1 -->
+          <ul class="float-cards">
+            <li class="float-card" style="--fx: var(--sage); --fx-soft: var(--sage-soft)">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 1.5h4.8L12.5 5v9a.9.9 0 0 1-.9.9H4a.9.9 0 0 1-.9-.9V2.4A.9.9 0 0 1 4 1.5z" fill="currentColor"/><path d="M8.8 1.5 12.5 5H8.8z" fill="#fff" opacity=".4"/><path d="M5.8 8.2h4.4M5.8 10.7h4.4" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg>
+              노션·PDF 그대로
+            </li>
+            <li class="float-card" style="--fx: var(--apricot); --fx-soft: var(--apricot-soft)">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8 9.5 6l4.2 1.5L9.5 9 8 13.2 6.5 9 2.3 7.5 6.5 6z" fill="currentColor"/><circle cx="13" cy="12.6" r="1.2" fill="currentColor"/></svg>
+              퀴즈는 AI가
+            </li>
+            <li class="float-card" style="--fx: var(--dusk); --fx-soft: var(--dusk-soft)">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.2" y="6.6" width="9.6" height="7.2" rx="1.8" fill="currentColor"/><path d="M5.5 6.6V4.8a2.5 2.5 0 0 1 5 0v1.8" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="8" cy="9.7" r="1.15" fill="#fff"/><path d="M8 10.4v1.6" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg>
+              복습은 잠금화면에서
+            </li>
+          </ul>
         </div>
       </div>
+      <div class="scroll-cue" aria-hidden="true"></div>
     </section>
+    </div>
 
     <!-- 공감 -->
     <section class="empathy">
@@ -75,72 +129,159 @@
       </div>
     </section>
 
-    <!-- 3 스텝 -->
-    <section class="steps">
-      <div class="section-inner">
-        <p class="eyebrow reveal">문득이 하는 일</p>
-        <h2 class="reveal">공부 방식은 그대로,<br>복습만 저절로</h2>
-
-        <div class="step reveal">
-          <div class="step-copy">
-            <span class="step-num">STEP 1</span>
-            <h3>노트를 그대로 가져와요</h3>
-            <p>노션 페이지를 연결하거나 PDF·마크다운 파일을 올리면 끝. 정리하던 방식을 바꿀 필요 없어요.</p>
-            <p class="demo-hint"><span class="dot"></span>실제로 눌러볼 수 있는 데모예요 — 화면 속 버튼으로 진행해보세요</p>
-          </div>
-          <iframe class="step-demo" src="demo/quiz-creation.html"
-                  title="문득 데모 — 화면 속 버튼을 눌러 AI 퀴즈 생성 과정을 직접 체험해보세요"
-                  loading="lazy" scrolling="no"></iframe>
-        </div>
-
-        <div class="step reveal">
-          <div class="step-copy">
-            <span class="step-num">STEP 2</span>
-            <h3>퀴즈는 문득이 만들어요</h3>
-            <p>자료마다 나만의 문제집이 생겨요. 문제 만드느라 애쓸 필요 없어요.</p>
-          </div>
-          <iframe class="screen-demo" src="demo/screen-home.html"
-                  title="자료마다 자동 생성된 나만의 문제집이 보이는 홈 화면"
-                  loading="lazy" scrolling="no"></iframe>
-        </div>
-
-        <div class="step reveal">
-          <div class="step-copy">
-            <span class="step-num">STEP 3</span>
-            <h3>잠금화면에서 풀기만 하면 끝</h3>
-            <p>앱을 열 필요도, 복습 시간을 따로 낼 필요도 없어요. 폰을 켜는 순간이 복습 시간이 돼요.</p>
-            <p class="demo-hint"><span class="dot"></span>실제로 풀어볼 수 있는 데모예요 — 정답을 직접 골라보세요</p>
-          </div>
-          <iframe class="step-demo" src="demo/lockscreen.html"
-                  title="문득 데모 — 잠금화면 퀴즈를 직접 풀어보세요"
-                  loading="lazy" scrolling="no"></iframe>
-        </div>
-      </div>
-    </section>
-
-    <!-- 망각곡선 -->
-    <section class="why">
+    <!-- 망각곡선 — 과학적 근거 (에빙하우스) -->
+    <section class="curve">
       <div class="section-inner">
         <p class="eyebrow reveal">왜 "잊을 때쯤"인가요?</p>
-        <h2 class="reveal">기억이 흐려질 때,<br>내가 찾아갈게요</h2>
-        <p class="why-body reveal">
-          사람은 하루만 지나도 배운 것의 절반을 잊어요.<br>
-          문득은 문제 하나하나 <strong>잊어갈 때쯤</strong>을 계산해 다시 보여줘요.<br>
+        <h2 class="reveal">하루가 지나면,<br>배운 것의 <span class="counter-wrap"><span id="retain-counter">33</span>%</span>만 남아요</h2>
+        <div class="curve-chart reveal" id="curve-chart" role="img"
+             aria-label="복습이 없을 때 기억이 빠르게 사라지는 곡선과, 문득의 복습 타이밍으로 기억이 유지되는 곡선을 비교한 개념 그래프">
+          <svg viewBox="0 0 640 340" aria-hidden="true">
+            <!-- 축 -->
+            <line x1="50" y1="36" x2="50" y2="300" stroke="rgba(242,232,214,0.15)" stroke-width="1.5"/>
+            <line x1="50" y1="300" x2="610" y2="300" stroke="rgba(242,232,214,0.15)" stroke-width="1.5"/>
+            <text class="axis" x="58" y="30">기억 유지율</text>
+            <text class="axis" x="574" y="322">시간 →</text>
+            <!-- 복습 없음: 급락 곡선 -->
+            <path class="c-decay" d="M50,60 C120,190 230,262 600,286"/>
+            <!-- 문득: 잊을 때쯤 복습으로 회복하는 톱니 곡선 -->
+            <path class="c-keep" d="M50,60 C100,112 150,142 190,152 L190,84
+                                     C250,122 310,138 350,144 L350,88
+                                     C420,112 480,120 510,124 L510,92
+                                     C560,100 590,102 604,103"/>
+            <!-- 복습 포인트 -->
+            <g class="rev-pt"><circle cx="190" cy="84" r="7"/><text x="190" y="62" text-anchor="middle">1일 후</text></g>
+            <g class="rev-pt"><circle cx="350" cy="88" r="7"/><text x="350" y="66" text-anchor="middle">7일 후</text></g>
+            <g class="rev-pt"><circle cx="510" cy="92" r="7"/><text x="510" y="70" text-anchor="middle">한 달 후</text></g>
+          </svg>
+          <div class="curve-legend">
+            <span class="lg decay">복습이 없을 때</span>
+            <span class="lg keep">문득과 함께할 때</span>
+          </div>
+        </div>
+        <p class="curve-body reveal">
+          사람은 하루만 지나도 배운 것의 절반 이상을 잊어요.<br>
+          문득은 문제 하나하나 <strong>잊어갈 때쯤</strong>을 계산해 잠금화면으로 다시 보여줘요.<br>
           맞힐수록 간격은 길어지고, 기억은 오래 남아요.
         </p>
+        <p class="curve-footnote reveal">* 에빙하우스 망각곡선(Ebbinghaus, 1885) 연구를 바탕으로 한 개념 그래프입니다.</p>
       </div>
     </section>
 
-    <!-- Final CTA -->
-    <section class="final">
+    <!-- 기능 — STEP 1 · 가져오기 (sage) -->
+    <section class="feature" style="--fx: var(--sage); --fx-soft: var(--sage-soft)">
+      <div class="feature-head">
+        <p class="eyebrow reveal">문득이 하는 일</p>
+        <h2 class="reveal">공부 방식은 그대로,<br>복습만 저절로</h2>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-copy">
+          <span class="feature-label">STEP 1 · 가져오기</span>
+          <h2>노트를 그대로 가져와요</h2>
+          <p>노션 페이지를 연결하거나 PDF·마크다운 파일을 올리면 끝. 정리하던 방식을 바꿀 필요 없어요.</p>
+          <p class="demo-hint"><span class="dot"></span>실제로 눌러볼 수 있는 데모예요 — 화면 속 버튼으로 진행해보세요</p>
+        </div>
+        <iframe class="step-demo" width="340" height="765" src="demo/quiz-creation.html"
+                title="문득 데모 — 화면 속 버튼을 눌러 AI 퀴즈 생성 과정을 직접 체험해보세요"
+                loading="lazy" scrolling="no"></iframe>
+      </div>
+    </section>
+
+    <!-- 기능 — STEP 2 · 퀴즈 생성 (apricot) -->
+    <section class="feature" style="--fx: var(--apricot); --fx-soft: var(--apricot-soft)">
+      <div class="feature-card reveal">
+        <div class="feature-copy">
+          <span class="feature-label">STEP 2 · 퀴즈 생성</span>
+          <h2>퀴즈는 문득이 만들어요</h2>
+          <p>자료마다 나만의 문제집이 생겨요. 문제 만드느라 애쓸 필요 없어요.</p>
+        </div>
+        <iframe class="screen-demo" width="340" height="680" src="demo/screen-home.html"
+                title="자료마다 자동 생성된 나만의 문제집이 보이는 홈 화면"
+                loading="lazy" scrolling="no"></iframe>
+      </div>
+    </section>
+
+    <!-- 기능 — STEP 3 · 잠금화면 복습 (dusk) -->
+    <section class="feature" style="--fx: var(--dusk); --fx-soft: var(--dusk-soft)">
+      <div class="feature-card reveal">
+        <div class="feature-copy">
+          <span class="feature-label">STEP 3 · 잠금화면 복습</span>
+          <h2>잠금화면에서 풀기만 하면 끝</h2>
+          <p>앱을 열 필요도, 복습 시간을 따로 낼 필요도 없어요. 폰을 켜는 순간이 복습 시간이 돼요.</p>
+          <p class="demo-hint"><span class="dot"></span>실제로 풀어볼 수 있는 데모예요 — 정답을 직접 골라보세요</p>
+        </div>
+        <iframe class="step-demo" width="340" height="765" src="demo/lockscreen.html"
+                title="문득 데모 — 잠금화면 퀴즈를 직접 풀어보세요"
+                loading="lazy" scrolling="no"></iframe>
+      </div>
+    </section>
+
+    <!-- USP 아코디언 -->
+    <section class="usp">
+      <div class="section-inner">
+        <p class="eyebrow reveal">문득이어야 하는 이유</p>
+        <h2 class="reveal">복습 앱은 많지만,<br>문득은 조금 달라요</h2>
+        <div class="usp-list reveal">
+          <details class="usp-item" open>
+            <summary>퀴즈를 직접 만들지 않아도 돼요</summary>
+            <p>플래시카드 앱은 카드 만들다 지쳐 포기하기 쉬워요. 문득은 노트를 올리는 순간 AI가 핵심을 골라 퀴즈로 만들어드려요.</p>
+          </details>
+          <details class="usp-item">
+            <summary>복습 타이밍을 대신 계산해드려요</summary>
+            <p>'언제 다시 봐야 하지?' 고민하지 않아도 돼요. 문제 하나하나 망각곡선에 맞춰, 잊어갈 때쯤 다시 찾아가요.</p>
+          </details>
+          <details class="usp-item">
+            <summary>앱을 열지 않아도 복습이 돼요</summary>
+            <p>의지력에 기대는 복습은 오래가지 못해요. 폰을 켜는 잠금화면이 곧 복습 시간이 되니까 하루에도 수십 번 자연스럽게 만나요.</p>
+          </details>
+          <details class="usp-item">
+            <summary>쓰던 노트를 그대로 써요</summary>
+            <p>새로운 필기법을 배울 필요 없어요. 노션·PDF·마크다운, 지금 정리하던 방식 그대로 연결하면 끝이에요.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 아웃트로 CTA -->
+    <section class="outro">
       <div class="section-inner reveal">
-        <iframe class="screen-demo final-demo" src="demo/screen-review.html"
+        <iframe class="screen-demo final-demo" width="300" height="600" src="demo/screen-review.html"
                 title="문제집에서 복습을 시작하는 화면"
                 loading="lazy" scrolling="no"></iframe>
-        <h2>지금 문득을 시작해보세요</h2>
-        <p class="sub">기억은 흐려져도, 배움은 계속돼요.</p>
+        <h2>오늘 정리한 노트가,<br>내일의 기억이 되도록</h2>
+        <p class="sub">기억은 흐려져도, 배움은 계속돼요.<br>당신이 잊을 때쯤, 문득이 찾아갈게요.</p>
         <div class="cta-group center">
           <a id="cta-play-final" class="btn-store" href="#" rel="noopener">Google Play에서 받기</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <div class="section-inner">
+        <p class="eyebrow reveal">자주 묻는 질문</p>
+        <h2 class="reveal">궁금한 게 있나요?</h2>
+        <div class="faq-list reveal">
+          <details class="faq-item">
+            <summary>잠금화면 복습은 어떻게 작동하나요?</summary>
+            <p>안드로이드 잠금화면 위에 퀴즈 카드가 떠요. 폰을 켤 때 한 문제만 풀고 넘어가면 돼요. 앱을 열 필요도, 알림을 누를 필요도 없어요.</p>
+          </details>
+          <details class="faq-item">
+            <summary>노션 페이지로 정말 퀴즈를 만들 수 있나요?</summary>
+            <p>네. 노션 페이지를 연결하거나 PDF·마크다운 파일을 올리면 AI가 내용을 읽고 퀴즈를 자동으로 만들어드려요. 전공 필기, 자격증 요약본까지 텍스트 자료라면 대부분 가능해요.</p>
+          </details>
+          <details class="faq-item">
+            <summary>망각곡선 복습이 뭔가요?</summary>
+            <p>사람은 배운 지 하루 만에 절반 이상을 잊는다는 에빙하우스의 연구에서 나온 개념이에요. 잊어갈 때쯤 다시 보면 기억이 오래가는데, 문득은 그 타이밍을 문제마다 자동으로 계산해요.</p>
+          </details>
+          <details class="faq-item">
+            <summary>무료로 써볼 수 있나요?</summary>
+            <p>문득은 구독제로 운영돼요. 지금 가입하면 무료 이용 기회 5번을 드리니, 부담 없이 먼저 써보고 결정하세요.</p>
+          </details>
+          <details class="faq-item">
+            <summary>아이폰(iOS)에서도 쓸 수 있나요?</summary>
+            <p>지금은 안드로이드(Google Play)에서 먼저 만나볼 수 있어요. iOS 버전은 열심히 준비하고 있으니 조금만 기다려 주세요.</p>
+          </details>
         </div>
       </div>
     </section>
@@ -166,7 +307,7 @@
 
   <!-- PostHog (앱과 동일 프로젝트 — 클라 공개 키) -->
   <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])}}(document,window.posthog||[]);
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_ydXLm5y7tezFjRpfz6T6Hrdb9xDqzFdciVScTXmZ4sEC', {
       api_host: 'https://us.i.posthog.com',
       person_profiles: 'identified_only'
@@ -203,22 +344,205 @@
         document.getElementById('ios-note').hidden = false;
       });
 
-      // 스크롤 등장 애니메이션 — 모션 최소화 설정이면 즉시 표시
       var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var targets = document.querySelectorAll('.reveal');
-      if (reduced || !('IntersectionObserver' in window)) {
-        targets.forEach(function (el) { el.classList.add('in'); });
-        return;
-      }
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            io.unobserve(entry.target);
+      var hasIO = 'IntersectionObserver' in window;
+
+      // 스크롤 등장 애니메이션 — 모션 최소화 설정이면 즉시 표시
+      (function initReveal() {
+        var targets = document.querySelectorAll('.reveal');
+        if (reduced || !hasIO) {
+          targets.forEach(function (el) { el.classList.add('in'); });
+          return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        targets.forEach(function (el) { io.observe(el); });
+      })();
+
+      // 히어로 문구 — 데스크톱: 스크롤 진행에 따라 전환(핀 구간), 모바일: 타이머 로테이션.
+      // 모션 최소화면 첫 문구 고정 (핀 해제는 CSS가 담당)
+      (function initHeroPhrases() {
+        var phrases = Array.prototype.slice.call(document.querySelectorAll('#hero-rotator .phrase'));
+        var track = document.getElementById('hero-track');
+        if (phrases.length < 2 || !track) return;
+
+        function setPhrase(idx) {
+          phrases.forEach(function (p, i) {
+            p.classList.toggle('is-on', i === idx);
+            p.classList.toggle('is-past', i < idx);
+          });
+        }
+
+        if (reduced) { setPhrase(0); return; }
+
+        var mq = window.matchMedia('(min-width: 641px)');
+        var hero = track.querySelector('.hero');
+        var PHRASE_PORTION = 0.72; // 앞 72%는 문구 전환, 나머지는 폰 장면 등장 구간
+        var timerId = null;
+        var ticking = false;
+
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(function () {
+            ticking = false;
+            var span = track.offsetHeight - window.innerHeight;
+            if (span <= 0) return;
+            var p = (window.scrollY - track.offsetTop) / span;
+            p = Math.max(0, Math.min(0.999, p));
+            if (p < PHRASE_PORTION) {
+              setPhrase(Math.floor(p / PHRASE_PORTION * phrases.length));
+              hero.classList.remove('is-reveal');
+            } else {
+              setPhrase(phrases.length - 1);
+              hero.classList.add('is-reveal');
+            }
+          });
+        }
+
+        function apply() {
+          if (mq.matches) {
+            if (timerId) { clearInterval(timerId); timerId = null; }
+            hero.classList.add('hero-pin');
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+          } else {
+            window.removeEventListener('scroll', onScroll);
+            hero.classList.remove('hero-pin', 'is-reveal');
+            var idx = 0;
+            setPhrase(0);
+            if (!timerId) {
+              timerId = setInterval(function () {
+                idx = (idx + 1) % phrases.length;
+                setPhrase(idx);
+              }, 3200);
+            }
           }
+        }
+
+        apply();
+        if (mq.addEventListener) mq.addEventListener('change', apply);
+      })();
+
+      // 망각곡선 — 뷰포트 진입 시 곡선 그리기 + 유지율 카운트다운(100→33)
+      (function initCurve() {
+        var chart = document.getElementById('curve-chart');
+        var counter = document.getElementById('retain-counter');
+        if (!chart) return;
+        if (reduced || !hasIO) return; // 곡선 즉시 완성, 카운터 33 유지
+
+        var paths = chart.querySelectorAll('.c-decay, .c-keep');
+        paths.forEach(function (p) {
+          var len = p.getTotalLength();
+          // 초기 세팅이 transition을 타지 않도록 잠시 끔
+          p.style.transition = 'none';
+          p.style.strokeDasharray = len;
+          p.style.strokeDashoffset = len;
+          void p.getBoundingClientRect();
+          p.style.transition = '';
         });
-      }, { threshold: 0.15 });
-      targets.forEach(function (el) { io.observe(el); });
+        counter.textContent = '100';
+
+        function animateCounter() {
+          var from = 100, to = 33, dur = 1400, t0 = null;
+          function tick(ts) {
+            if (!t0) t0 = ts;
+            var t = Math.min(1, (ts - t0) / dur);
+            var eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+            counter.textContent = Math.round(from + (to - from) * eased);
+            if (t < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        }
+
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            chart.classList.add('drawn');
+            paths.forEach(function (p) { p.style.strokeDashoffset = 0; });
+            animateCounter();
+            io.unobserve(chart);
+          });
+        }, { threshold: 0.4 });
+        io.observe(chart);
+      })();
+
+      // USP·FAQ 아코디언 — 부드러운 펼침/접힘 (details 기본 스냅 동작 대체)
+      // USP 배타 오픈도 name 속성 대신 여기서 애니메이션과 함께 처리
+      (function initAccordions() {
+        var items = Array.prototype.slice.call(document.querySelectorAll('.usp-item, .faq-item'));
+
+        function contentOf(d) {
+          return d.querySelector('summary').nextElementSibling;
+        }
+
+        // 열림/닫힘이 동시에 일어날 때 전체 높이가 들썩이지 않도록
+        // 두 애니메이션의 시간·이징을 반드시 동일하게 유지
+        var ACC_DURATION = 320;
+        var ACC_EASING = 'cubic-bezier(0.4, 0, 0.2, 1)';
+
+        // border-box라 height:0이어도 padding-bottom(20px)만큼 남아 끝에서 스냅이 생기므로
+        // 패딩도 함께 애니메이션해 진짜 0px까지 부드럽게 접는다
+        function foldKeyframes(c, opening) {
+          var pb = getComputedStyle(c).paddingBottom;
+          var full = c.scrollHeight + 'px';
+          return opening
+            ? { height: ['0px', full], paddingBottom: ['0px', pb], opacity: [0, 1] }
+            : { height: [full, '0px'], paddingBottom: [pb, '0px'], opacity: [1, 0] };
+        }
+
+        function expand(d) {
+          d.open = true;
+          if (reduced) return;
+          var c = contentOf(d);
+          c.getAnimations().forEach(function (a) { a.cancel(); });
+          c.animate(foldKeyframes(c, true), { duration: ACC_DURATION, easing: ACC_EASING });
+        }
+
+        function collapse(d) {
+          var c = contentOf(d);
+          if (reduced) { d.open = false; return; }
+          c.getAnimations().forEach(function (a) { a.cancel(); });
+          d.classList.add('closing');
+          var anim = c.animate(foldKeyframes(c, false), { duration: ACC_DURATION, easing: ACC_EASING });
+          anim.onfinish = function () {
+            d.open = false;
+            d.classList.remove('closing');
+          };
+        }
+
+        items.forEach(function (d) {
+          d.querySelector('summary').addEventListener('click', function (e) {
+            e.preventDefault();
+            if (d.classList.contains('closing')) return;
+            if (d.open) { collapse(d); return; }
+            if (d.classList.contains('usp-item')) {
+              items.forEach(function (o) {
+                if (o !== d && o.classList.contains('usp-item') && o.open && !o.classList.contains('closing')) {
+                  collapse(o);
+                }
+              });
+            }
+            expand(d);
+          });
+
+          // 열람 추적
+          d.addEventListener('toggle', function () {
+            if (d.open) {
+              posthog.capture('landing_faq_toggle', {
+                section: d.classList.contains('usp-item') ? 'usp' : 'faq',
+                question: d.querySelector('summary').textContent.trim()
+              });
+            }
+          });
+        });
+      })();
     })();
   </script>
 </body>

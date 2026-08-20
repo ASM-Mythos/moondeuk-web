@@ -42,7 +42,7 @@
   /* ---------- 클릭 유도 ---------- */
   .hl { cursor:pointer; animation:pulse 1.6s ease-out infinite; }
   @keyframes pulse { 0% { box-shadow:0 0 0 0 rgba(192,137,74,.55); } 70% { box-shadow:0 0 0 13px rgba(192,137,74,0); } 100% { box-shadow:0 0 0 0 rgba(192,137,74,0); } }
-  .coach { position:absolute; z-index:30; background:#2F2616; color:#fff; font-size:12.5px; font-weight:700; padding:9px 13px; border-radius:12px;
+  .coach { position:absolute; z-index:30; background:#2F2616; color:#fff; font-size:15px; font-weight:700; padding:9px 13px; border-radius:12px;
     box-shadow:0 6px 16px rgba(0,0,0,.28); white-space:nowrap; pointer-events:none; animation:bob 1.6s ease-in-out infinite; }
   .coach::after { content:''; position:absolute; width:10px; height:10px; background:#2F2616; transform:rotate(45deg); }
   .coach.arrow-top::after { top:-4px; left:50%; margin-left:-5px; }
@@ -229,13 +229,6 @@
 <div class="demo-head">
   <h1>문득이 퀴즈를 만드는 과정</h1>
   <p>화면 속 반짝이는 버튼을 직접 눌러보세요</p>
-  <div class="steps" id="steps">
-    <div class="step on"><i></i>홈</div>
-    <div class="step"><i></i>소스 선택</div>
-    <div class="step"><i></i>내용 선택</div>
-    <div class="step"><i></i>AI 생성</div>
-    <div class="step"><i></i>퀴즈 풀기</div>
-  </div>
   <button class="restart" onclick="location.reload()">↻ 처음부터 다시</button>
 </div>
 
