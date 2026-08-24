@@ -45,7 +45,7 @@
   .opt { margin-top:9px; background:#fff; border:1.5px solid #EDE3CF; border-radius:18px; padding:13px 18px; display:flex; align-items:center; gap:12px;
     font-size:14px; font-weight:500; color:#2F2616; cursor:pointer; transition:background .2s, border-color .2s; }
   .q-card + .opt { margin-top:11px; }
-  .opt .no { width:26px; height:26px; border-radius:50%; background:#F0E9DB; color:#8A7C64; font-size:12.5px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s; }
+  .opt .no { width:26px; height:26px; border-radius:50%; background:#F0E9DB; color:#4A3A20; font-size:12.5px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s; }
   .opt .tail { margin-left:auto; display:none; }
   .opt.correct { background:#E9F0E4; border-color:#57A773; }
   .opt.correct .no { background:#57A773; color:#fff; }
@@ -68,8 +68,13 @@
 
   /* 클릭 유도 */
   .hint-pulse { animation:pulse 1.8s ease-out infinite; }
-  @keyframes pulse { 0% { box-shadow:0 0 0 0 rgba(245,231,208,.4); } 70% { box-shadow:0 0 0 10px rgba(245,231,208,0); } 100% { box-shadow:0 0 0 0 rgba(245,231,208,0); } }
-  .coach { position:absolute; z-index:30; background:#F5E7D0; color:#6B4E27; font-size:12.5px; font-weight:700; padding:9px 13px; border-radius:12px;
+  @keyframes pulse {
+    0%   { box-shadow:0 0 0 0 rgba(245,158,11,.95); border-color:#F59E0B; }
+    35%  { border-color:#F59E0B; }
+    70%  { box-shadow:0 0 0 12px rgba(245,158,11,0); border-color:#EDE3CF; }
+    100% { box-shadow:0 0 0 0 rgba(245,158,11,0); border-color:#EDE3CF; }
+  }
+  .coach { position:absolute; z-index:30; background:#F5E7D0; color:#6B4E27; font-size:15px; font-weight:700; padding:9px 13px; border-radius:12px;
     box-shadow:0 6px 16px rgba(0,0,0,.35); white-space:nowrap; pointer-events:none; animation:bob 1.6s ease-in-out infinite; }
   .coach::after { content:''; position:absolute; width:10px; height:10px; background:#F5E7D0; transform:rotate(45deg); top:-4px; left:50%; margin-left:-5px; }
   @keyframes bob { 0%,100% { translate:0 0; } 50% { translate:0 -5px; } }
