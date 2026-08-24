@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>문득 데모 — 잠금화면 퀴즈</title>
 <script>if (window.self !== window.top) document.documentElement.classList.add('embedded');</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   html,body { height:100%; }
@@ -156,7 +157,7 @@
       </div>
 
       <div id="opts"></div>
-      <div class="coach" id="coach" style="top:694px; left:50%; transform:translateX(-50%);">정답이라고 생각하는 보기를 눌러보세요 👆</div>
+      <div class="coach" id="coach" style="left:50%; transform:translateX(-50%);">정답이라고 생각하는 보기를 눌러보세요 👆</div>
     </div>
 
     <div class="confirm-btn" id="btn-confirm">확인</div>
@@ -237,6 +238,14 @@ QUESTION.opts.forEach(function (label, i) {
   o.addEventListener('click', function () { grade(i); });
   $('opts').appendChild(o);
 });
+
+// 코치 말풍선: 보기 목록 기준 배치 (OS별 폰트 메트릭 차이로 고정 px는 겹칠 수 있음)
+function placeCoach() {
+  var opts = $('opts');
+  $('coach').style.top = (opts.offsetTop + opts.offsetHeight + 8) + 'px';
+}
+placeCoach();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeCoach);
 
 // ── 채점: 한 번만, 정답은 항상 함께 공개 (앱과 동일) ──
 function grade(picked) {
