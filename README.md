@@ -9,7 +9,8 @@ GitHub Pages(`main` 루트)로 서빙한다. 빌드 없음 — HTML/CSS 만.
 | `index.html` | 인덱스(앱 소개 + 문서 링크) |
 | `account-deletion.html` | **계정 삭제 안내** — Play Console 데이터 보안 폼의 "계정 삭제 요청 URL"에 기재 |
 | `privacy.html` | **개인정보처리방침** — Play Console 앱 정보의 처리방침 URL에 기재 |
-| `terms.html` | **이용약관** — 앱 로그인 동의 바텀시트의 "이용약관 보기" 링크 대상 |
+| `terms.html` | **이용약관** — 앱 로그인 동의 바텀시트의 "이용약관 보기" 링크 대상. 2026-09-27 시행 개정판(유료 서비스 조항 — 정본 초안: `moondeuk-android/docs/legal/terms-amendment-draft.md`) |
+| `terms-20260731.html` | 구 약관 아카이브(2026-07-31 시행) — 부칙 ②의 개정 전 약관 링크 대상. 개정 때마다 직전 판을 `terms-YYYYMMDD.html` 로 보존 |
 
 ## 내용 유지보수 규칙
 
