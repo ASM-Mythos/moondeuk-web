@@ -41,6 +41,12 @@
         <td>서비스 이용 시</td>
       </tr>
       <tr>
+        <td>결제 정보</td>
+        <td>구독·크레딧 팩 구매 내역, Google Play 결제 영수증 검증 정보(구매 토큰), 구독 상태<br>
+          <span class="muted">카드번호 등 결제 수단 정보는 Google Play가 자체 처리하며 팀은 수집하지 않습니다.</span></td>
+        <td>유료 서비스 결제 시</td>
+      </tr>
+      <tr>
         <td>서비스 이용 기록</td>
         <td>앱 사용 이벤트(화면 이동·기능 사용 등), 기기·앱 버전 정보</td>
         <td>앱 사용 시</td>
@@ -52,6 +58,7 @@
       <li>구글 계정 기반 회원 식별·로그인 및 계정 관리</li>
       <li>연동·업로드한 콘텐츠로부터 퀴즈 자동 생성(AI 모델 처리 포함) 및 간격 반복 복습 제공</li>
       <li>모의고사 등 학습 기능 제공</li>
+      <li>인앱 결제 영수증 검증, 구독·크레딧 상태 관리 및 결제 관련 문의 대응</li>
       <li>서비스 이용 통계 분석과 품질 개선</li>
     </ul>
 
@@ -76,6 +83,7 @@
       <tr><td>Amazon Web Services, Inc.</td><td>서버·데이터베이스·파일 저장소 운영, AI 모델(Amazon Bedrock)을 통한 퀴즈 생성 처리</td></tr>
       <tr><td>PostHog, Inc.</td><td>앱·서버 사용 이벤트 수집·분석</td></tr>
       <tr><td>Microsoft Corporation (Clarity)</td><td>앱 화면 이용 기록(세션 리플레이·탭 히트맵) 수집·분석</td></tr>
+      <tr><td>RevenueCat, Inc.</td><td>인앱 결제 영수증 검증, 구독·크레딧 구매 상태 관리</td></tr>
       <tr><td>Functional Software, Inc. (Sentry)</td><td>서비스 오류 추적·복구</td></tr>
       <tr><td>LangChain, Inc. (LangSmith)</td><td>AI 퀴즈 생성 품질 모니터링을 위한 처리 기록 관리</td></tr>
     </table>
@@ -83,6 +91,8 @@
       한편 <strong>Google</strong>(구글 계정 로그인을 통한 본인 인증)과 <strong>Notion Labs, Inc.</strong>(이용자가 접근을
       허용한 페이지 콘텐츠 제공)는 팀이 개인정보를 넘기는 수탁자가 아니라, <strong>이용자의 요청과 승인에 따라 팀이
       정보를 받아오는 곳</strong>입니다. 팀은 이들 서비스에 이용자의 개인정보를 이전하지 않습니다.
+      유료 서비스의 결제는 <strong>Google Play 결제 시스템</strong>이 자체적으로 처리하며, 카드번호 등 결제 수단
+      정보는 Google의 개인정보처리방침에 따라 처리되고 팀에 제공되지 않습니다.
     </p>
 
     <h2>5-1. 개인정보의 국외 이전</h2>
@@ -119,6 +129,14 @@
         <td>앱 사용 시점에 정보통신망을 통해 암호화(HTTPS) 전송</td>
         <td>서비스 이용 분석 및 개선</td>
         <td>수집일로부터 30일 이내 파기</td>
+      </tr>
+      <tr>
+        <td>RevenueCat, Inc.<br><span class="muted">문의: revenuecat.com/privacy</span></td>
+        <td>미국</td>
+        <td>회원 식별자, Google Play 결제 영수증(구매 토큰)·구매 내역, 구독 상태, 기기·앱 버전 정보</td>
+        <td>유료 서비스 결제·구독 상태 갱신 시점에 정보통신망을 통해 암호화(HTTPS) 전송</td>
+        <td>인앱 결제 영수증 검증, 구독·크레딧 구매 상태 관리</td>
+        <td>회원 탈퇴 시 파기</td>
       </tr>
       <tr>
         <td>Functional Software, Inc. (Sentry)<br><span class="muted">문의: sentry.io/privacy</span></td>
@@ -175,13 +193,14 @@
     <h2 id="contact">10. 문의처</h2>
     <div class="card">
       <ul>
-        <li>팀: ASM Mythos (문득)</li>
+        <li>팀: 미토스 (ASM Mythos) · 문득</li>
         <li>이메일: <a href="mailto:asm.mythos@gmail.com">asm.mythos@gmail.com</a></li>
         <li>카카오톡 오픈채팅: <a href="https://open.kakao.com/o/sBOIR6Di">https://open.kakao.com/o/sBOIR6Di</a></li>
       </ul>
     </div>
 
     <p class="notice">2026년 9월 3일 개정 예정: 처리 위탁·국외 이전에 Microsoft Corporation(Clarity, 앱 화면 이용 기록) 추가.</p>
+    <p class="notice">2026년 9월 4일 개정 예정: 유료 서비스 출시에 따라 처리 항목에 결제 정보, 처리 위탁·국외 이전에 RevenueCat, Inc.(인앱 결제 영수증 검증·구독 상태 관리) 추가.</p>
     <p class="notice">시행일: 2026년 9월 3일</p>
 
     <footer class="site">© ASM Mythos · 문득 (Moondeuk) · <a href="terms.html">이용약관</a> · <a href="account-deletion.html">계정 삭제 안내</a></footer>
