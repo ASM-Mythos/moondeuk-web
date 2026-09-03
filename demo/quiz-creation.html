@@ -25,7 +25,7 @@
     font-family:inherit; font-size:12.5px; font-weight:700; padding:7px 16px; border-radius:16px; cursor:pointer; }
   .restart:hover { background:rgba(255,255,255,.18); }
 
-  .stage-wrap { flex:1; display:flex; align-items:flex-start; justify-content:center; margin-top:34px; }
+  .stage-wrap { flex:1; display:flex; align-items:flex-start; justify-content:center; width:100%; overflow-x:clip; overflow-y:visible; margin-top:34px; }
   .stage { width:393px; height:852px; transform-origin:top center; position:relative; }
 
   /* ---------- 폰 프레임: 이미지 베젤(iphone-frame.png) 오버레이 ---------- */
@@ -41,8 +41,13 @@
   .content { flex:1; overflow:hidden; padding:0 20px; position:relative; }
 
   /* ---------- 클릭 유도 ---------- */
-  .hl { cursor:pointer; animation:pulse 1.6s ease-out infinite; }
-  @keyframes pulse { 0% { box-shadow:0 0 0 0 rgba(192,137,74,.55); } 70% { box-shadow:0 0 0 13px rgba(192,137,74,0); } 100% { box-shadow:0 0 0 0 rgba(192,137,74,0); } }
+  /* 지금 누를 수 있는 요소는 주황 점선 사각형으로 명시 (히어로 데모와 동일) */
+  .hl { cursor:pointer; outline:3.5px dashed #B45309; outline-offset:3px; }
+  .hl:hover { outline-style:solid; }
+  #opts .opt:not(.correct):not(.wrong):not(.locked) { outline:3.5px dashed #B45309; outline-offset:3px; }
+  #opts .opt:not(.correct):not(.wrong):not(.locked):hover { outline-style:solid; }
+  .next-btn.show, .page-row, .picker-row { outline:3.5px dashed #B45309; outline-offset:3px; }
+  .page-row:hover, .picker-row:hover { outline-style:solid; }
   .coach { position:absolute; z-index:30; background:#2F2616; color:#fff; font-size:15px; font-weight:700; padding:9px 13px; border-radius:12px;
     box-shadow:0 6px 16px rgba(0,0,0,.28); white-space:nowrap; pointer-events:none; animation:bob 1.6s ease-in-out infinite; }
   .coach::after { content:''; position:absolute; width:10px; height:10px; background:#2F2616; transform:rotate(45deg); }

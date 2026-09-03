@@ -365,7 +365,7 @@
         targets.forEach(function (el) { io.observe(el); });
       })();
 
-      // 히어로 문구 — 데스크톱: 스크롤 진행에 따라 전환(핀 구간), 모바일: 타이머 로테이션.
+      // 히어로 문구 — 스크롤 진행에 따라 전환(핀 구간). 데스크톱은 CSS vh 트랙, 모바일은 JS가 트랙 높이 지정.
       // 모션 최소화면 첫 문구 고정 (핀 해제는 CSS가 담당)
       (function initHeroPhrases() {
         var phrases = Array.prototype.slice.call(document.querySelectorAll('#hero-rotator .phrase'));
@@ -383,15 +383,26 @@
 
         var mq = window.matchMedia('(min-width: 641px)');
         var hero = track.querySelector('.hero');
-        var timerId = null;
+        var MOBILE_PHRASE_SCROLL = 420; // 모바일: 문구 3개 전환에 쓰는 스크롤 거리(px)
         var ticking = false;
+
+        function stickyTop() {
+          return parseFloat(getComputedStyle(hero).top) || 0;
+        }
+
+        // 모바일은 히어로가 화면보다 길어 CSS vh로 트랙을 못 잡음 → 히어로 높이 + 전환 거리로 JS가 지정
+        function layoutTrack() {
+          if (mq.matches) { track.style.height = ''; return; }
+          track.style.height = (hero.offsetHeight + stickyTop() + MOBILE_PHRASE_SCROLL) + 'px';
+        }
 
         function onScroll() {
           if (ticking) return;
           ticking = true;
           requestAnimationFrame(function () {
             ticking = false;
-            var span = track.offsetHeight - window.innerHeight;
+            // sticky 구간 = 트랙 높이 − (히어로 높이 + sticky top). 데스크톱은 트랙 − 뷰포트와 같음
+            var span = track.offsetHeight - hero.offsetHeight - stickyTop();
             if (span <= 0) return;
             var p = (window.scrollY - track.offsetTop) / span;
             p = Math.max(0, Math.min(0.999, p));
@@ -400,25 +411,14 @@
         }
 
         function apply() {
-          if (mq.matches) {
-            if (timerId) { clearInterval(timerId); timerId = null; }
-            hero.classList.add('hero-pin');
-            window.addEventListener('scroll', onScroll, { passive: true });
-            onScroll();
-          } else {
-            window.removeEventListener('scroll', onScroll);
-            hero.classList.remove('hero-pin');
-            var idx = 0;
-            setPhrase(0);
-            if (!timerId) {
-              timerId = setInterval(function () {
-                idx = (idx + 1) % phrases.length;
-                setPhrase(idx);
-              }, 3200);
-            }
-          }
+          hero.classList.toggle('hero-pin', mq.matches);
+          layoutTrack();
+          onScroll();
         }
 
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', layoutTrack);
+        window.addEventListener('load', layoutTrack);
         apply();
         if (mq.addEventListener) mq.addEventListener('change', apply);
       })();

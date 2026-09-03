@@ -30,6 +30,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* 가로 스크롤 방지 — 모바일에서 화면이 좌우로 밀리지 않도록 뷰포트 밖 요소를 잘라냄
+   (clip은 스크롤 컨테이너를 만들지 않아 히어로 sticky에 영향 없음) */
+html,
+body {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+iframe {
+  max-width: 100%;
+}
+
 body {
   margin: 0;
   background: var(--paper);
@@ -231,16 +243,20 @@ h2 {
   color: var(--fx, var(--camel));
 }
 
+/* epop식 스크롤 핀 — 트랙을 스크롤하는 동안 히어로가 고정되고 문구가 전환됨.
+   모바일은 히어로가 화면보다 길어 트랙 높이를 JS가 지정(히어로 높이 + 전환 거리) */
+.hero-track .hero {
+  position: sticky;
+  top: var(--nav-h);
+}
+
 @media (min-width: 641px) {
-  /* epop식 스크롤 핀 — 트랙을 스크롤하는 동안 히어로가 고정되고 문구가 전환됨.
-     문구와 폰 장면은 처음부터 함께 표시 */
+  /* 데스크톱: 문구와 폰 장면을 처음부터 함께 표시, 트랙은 vh 기준 */
   .hero-track {
     height: 260vh;
   }
 
   .hero-track .hero {
-    position: sticky;
-    top: var(--nav-h);
     min-height: calc(100vh - var(--nav-h));
     max-height: calc(100vh - var(--nav-h));
     padding-top: 24px;
@@ -842,12 +858,36 @@ footer.site a {
     padding: 40px 20px 64px;
   }
 
+  /* 1단계: 문구 블록만 첫 화면을 꽉 채움 → 핀 구간에서 문구 전환 → 2단계: 폰 장면이 아래에서 올라옴 */
   .hero-copy {
     text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - var(--nav-h) - 40px);
+    min-height: calc(100svh - var(--nav-h) - 40px);
+    padding-bottom: 96px; /* 하단 고정 CTA 바(약 82px) 위로 화살표 자리 확보 */
   }
 
   .hero-copy .cta-group {
     justify-content: center;
+  }
+
+  /* 스크롤 유도 화살표 — 문구 블록 하단 */
+  .hero-copy::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 100px;
+    width: 14px;
+    height: 14px;
+    border-right: 3px solid var(--camel-dark);
+    border-bottom: 3px solid var(--camel-dark);
+    border-radius: 1px;
+    opacity: 0.5;
+    transform: translateX(-50%) rotate(45deg);
+    animation: cue-bounce 1.6s ease-in-out infinite;
   }
 
   .hero-shot {
@@ -921,5 +961,9 @@ footer.site a {
 
   .scroll-cue {
     display: none;
+  }
+
+  .hero-copy::after {
+    animation: none;
   }
 }
