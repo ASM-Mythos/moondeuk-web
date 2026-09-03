@@ -383,7 +383,6 @@
 
         var mq = window.matchMedia('(min-width: 641px)');
         var hero = track.querySelector('.hero');
-        var PHRASE_PORTION = 0.72; // 앞 72%는 문구 전환, 나머지는 폰 장면 등장 구간
         var timerId = null;
         var ticking = false;
 
@@ -396,13 +395,7 @@
             if (span <= 0) return;
             var p = (window.scrollY - track.offsetTop) / span;
             p = Math.max(0, Math.min(0.999, p));
-            if (p < PHRASE_PORTION) {
-              setPhrase(Math.floor(p / PHRASE_PORTION * phrases.length));
-              hero.classList.remove('is-reveal');
-            } else {
-              setPhrase(phrases.length - 1);
-              hero.classList.add('is-reveal');
-            }
+            setPhrase(Math.floor(p * phrases.length));
           });
         }
 
@@ -414,7 +407,7 @@
             onScroll();
           } else {
             window.removeEventListener('scroll', onScroll);
-            hero.classList.remove('hero-pin', 'is-reveal');
+            hero.classList.remove('hero-pin');
             var idx = 0;
             setPhrase(0);
             if (!timerId) {
