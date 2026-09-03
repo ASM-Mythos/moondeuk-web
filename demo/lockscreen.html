@@ -19,7 +19,7 @@
     font-family:inherit; font-size:12.5px; font-weight:700; padding:7px 16px; border-radius:16px; cursor:pointer; }
   .restart:hover { background:rgba(255,255,255,.18); }
 
-  .stage-wrap { flex:1; display:flex; align-items:flex-start; justify-content:center; margin-top:34px; }
+  .stage-wrap { flex:1; display:flex; align-items:flex-start; justify-content:center; width:100%; overflow-x:clip; overflow-y:visible; margin-top:34px; }
   .stage { width:393px; height:852px; transform-origin:top center; position:relative; }
 
   /* ── 폰 프레임: 이미지 베젤(iphone-frame.png) 오버레이, 스크린 393×852 ── */
@@ -67,17 +67,13 @@
   .later span { border-bottom:1px solid #DCD2BE; padding-bottom:2px; color:rgba(255,255,255,.55); border-color:rgba(255,255,255,.3); }
   .later.hidden { opacity:0; pointer-events:none; }
 
-  /* 클릭 유도 */
-  .hint-pulse { animation:pulse 1.8s ease-out infinite; }
-  @keyframes pulse {
-    0%   { box-shadow:0 0 0 0 rgba(245,158,11,.95); border-color:#F59E0B; }
-    35%  { border-color:#F59E0B; }
-    70%  { box-shadow:0 0 0 12px rgba(245,158,11,0); border-color:#EDE3CF; }
-    100% { box-shadow:0 0 0 0 rgba(245,158,11,0); border-color:#EDE3CF; }
-  }
-  .coach { position:absolute; z-index:30; background:#F5E7D0; color:#6B4E27; font-size:15px; font-weight:700; padding:9px 13px; border-radius:12px;
+  /* 클릭 유도 — 지금 누를 수 있는 요소는 주황 점선 사각형으로 명시 (히어로 데모와 동일) */
+  #opts.hint-box { outline:3.5px dashed #F59E0B; outline-offset:6px; border-radius:18px; }
+  #opts.hint-box:hover { outline-style:solid; }
+  .confirm-btn.show { outline:3.5px dashed #F59E0B; outline-offset:3px; }
+  .coach { position:absolute; z-index:30; background:#F59E0B; color:#3B2A0F; font-size:15px; font-weight:800; padding:9px 13px; border-radius:12px;
     box-shadow:0 6px 16px rgba(0,0,0,.35); white-space:nowrap; pointer-events:none; animation:bob 1.6s ease-in-out infinite; }
-  .coach::after { content:''; position:absolute; width:10px; height:10px; background:#F5E7D0; transform:rotate(45deg); top:-4px; left:50%; margin-left:-5px; }
+  .coach::after { content:''; position:absolute; width:10px; height:10px; background:#F59E0B; transform:rotate(45deg); top:-4px; left:50%; margin-left:-5px; }
   @keyframes bob { 0%,100% { translate:0 0; } 50% { translate:0 -5px; } }
 
   /* ── 결과 임팩트 연출 ── */
@@ -156,7 +152,7 @@
         <div class="q-text">"The new policy will take ___ next month." 빈칸에 알맞은 것은?</div>
       </div>
 
-      <div id="opts"></div>
+      <div id="opts" class="hint-box"></div>
       <div class="coach" id="coach" style="left:50%; transform:translateX(-50%);">정답이라고 생각하는 보기를 눌러보세요 👆</div>
     </div>
 
@@ -232,7 +228,6 @@ function flashScreen(color) {
 QUESTION.opts.forEach(function (label, i) {
   var o = document.createElement('div');
   o.className = 'opt hint-pulse';
-  o.style.animationDelay = (i * 0.25) + 's';
   o.innerHTML = '<div class="no">' + (i + 1) + '</div>' + label
     + '<div class="tail ok">' + okSvg + '</div><div class="tail no-ic">' + noSvg + '</div>';
   o.addEventListener('click', function () { grade(i); });
@@ -242,7 +237,7 @@ QUESTION.opts.forEach(function (label, i) {
 // 코치 말풍선: 보기 목록 기준 배치 (OS별 폰트 메트릭 차이로 고정 px는 겹칠 수 있음)
 function placeCoach() {
   var opts = $('opts');
-  $('coach').style.top = (opts.offsetTop + opts.offsetHeight + 8) + 'px';
+  $('coach').style.top = (opts.offsetTop + opts.offsetHeight + 14) + 'px';
 }
 placeCoach();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeCoach);
@@ -253,6 +248,7 @@ function grade(picked) {
   graded = true;
   var correct = picked === QUESTION.answer;
   var opts = document.querySelectorAll('#opts .opt');
+  $('opts').classList.remove('hint-box');
   opts.forEach(function (o, i) {
     o.classList.remove('hint-pulse');
     o.style.pointerEvents = 'none';

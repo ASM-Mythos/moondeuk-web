@@ -11,7 +11,7 @@
   body { font-family:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
     display:flex; flex-direction:column; align-items:center; }
 
-  .stage-wrap { flex:1; display:flex; align-items:flex-start; justify-content:center; }
+  .stage-wrap { flex:1; display:flex; align-items:flex-start; justify-content:center; width:100%; overflow-x:clip; overflow-y:visible; }
   .stage { width:393px; height:852px; transform-origin:top center; position:relative; }
 
   /* ── 폰 프레임: 이미지 베젤(iphone-frame.png) 오버레이, 스크린 393×852 ── */
@@ -161,14 +161,36 @@ function reset() {
   $('btn-confirm').classList.remove('show');
 }
 
+// ── 재생 타이밍: 폰이 화면에 충분히 들어온 뒤 시작, 벗어나면 미해결 상태로 되돌림 ──
+var timers = [];
+function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+var REVEAL_MS = 1000; // 재생 시작 후 정답 공개까지
+var LOOP_MS = 6400;   // 리셋 → 다시 공개 반복 주기
+function play() {
+  stop();
+  reset();
+  later(function () { reveal(true); }, REVEAL_MS);
+  timers.push(setInterval(function () {
+    reset();
+    later(function () { reveal(true); }, REVEAL_MS);
+  }, LOOP_MS));
+}
+function stop() {
+  timers.forEach(function (t) { clearTimeout(t); clearInterval(t); });
+  timers = [];
+}
+
 if (reduced) {
   reveal(false); // 정답 공개 상태로 고정
+} else if ('IntersectionObserver' in window) {
+  var playing = false;
+  new IntersectionObserver(function (entries) {
+    var vis = entries[0].isIntersecting;
+    if (vis && !playing) { playing = true; play(); }
+    else if (!vis && playing) { playing = false; stop(); reset(); }
+  }, { threshold: 0.7 }).observe(document.querySelector('.phone'));
 } else {
-  setTimeout(function () { reveal(true); }, 1800);
-  setInterval(function () {
-    reset();
-    setTimeout(function () { reveal(true); }, 1800);
-  }, 7200);
+  play();
 }
 
 // ── 뷰포트에 맞게 폰 스케일 (프레임 포함 444.4×904.4, 상단 오버행 26.7) ──
