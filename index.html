@@ -63,7 +63,10 @@
         <img src="assets/app-icon.png" alt="" width="28" height="28">
         <span>문득</span>
       </a>
-      <a id="cta-play-nav" class="btn-nav" href="#">앱 다운로드</a>
+      <div class="nav-cta">
+        <a id="cta-play-nav" class="btn-nav" href="#" rel="noopener">Google Play</a>
+        <a id="cta-ios-nav" class="btn-nav" href="#" rel="noopener">App Store</a>
+      </div>
     </div>
   </header>
 
@@ -343,20 +346,25 @@
         });
       }
 
-      ['cta-play-hero', 'cta-play-final'].forEach(function (id) { bindStore(id, 'google_play', playUrl); });
-      ['cta-ios-hero', 'cta-ios-final'].forEach(function (id) { bindStore(id, 'app_store', APP_STORE_URL); });
+      ['cta-play-nav', 'cta-play-hero', 'cta-play-final'].forEach(function (id) { bindStore(id, 'google_play', playUrl); });
+      ['cta-ios-nav', 'cta-ios-hero', 'cta-ios-final'].forEach(function (id) { bindStore(id, 'app_store', APP_STORE_URL); });
 
-      // 단일 버튼(헤더·모바일 하단 바)은 접속 기기에 맞는 스토어로 — 아이폰/아이패드면 App Store, 그 외 Google Play
-      var isApple = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+      // 기기 감지 — 아이폰/아이패드(iPadOS 데스크톱 UA 포함)면 App Store, 안드로이드면 Google Play.
+      // 폰에서는 헤더에 맞는 스토어 버튼 하나만 남기고, 데스크톱은 어느 폰인지 알 수 없으니 둘 다 표시.
+      var ua = navigator.userAgent;
+      var isApple = /iPhone|iPad|iPod/.test(ua) ||
         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-      ['cta-play-nav', 'cta-play-bar'].forEach(function (id) {
-        if (isApple) {
-          bindStore(id, 'app_store', APP_STORE_URL);
-          if (id === 'cta-play-bar') document.getElementById(id).textContent = 'App Store에서 받기';
-        } else {
-          bindStore(id, 'google_play', playUrl);
-        }
-      });
+      var isAndroid = /Android/.test(ua);
+      if (isApple) document.getElementById('cta-play-nav').hidden = true;
+      if (isAndroid) document.getElementById('cta-ios-nav').hidden = true;
+
+      // 모바일 하단 바(단일 버튼)
+      if (isApple) {
+        bindStore('cta-play-bar', 'app_store', APP_STORE_URL);
+        document.getElementById('cta-play-bar').textContent = 'App Store에서 받기';
+      } else {
+        bindStore('cta-play-bar', 'google_play', playUrl);
+      }
 
       var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var hasIO = 'IntersectionObserver' in window;
