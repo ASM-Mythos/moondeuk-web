@@ -398,19 +398,6 @@ h1 em {
   transform: scale(0.97);
 }
 
-.btn-store-soon {
-  background: transparent;
-  color: var(--text-secondary);
-  border: 1.5px solid var(--cream-dark);
-  box-shadow: none;
-}
-
-.ios-note {
-  margin: 12px 0 0;
-  font-size: 14px;
-  color: var(--camel-dark);
-}
-
 /* 공감 — 말풍선 */
 .empathy {
   background: var(--paper);
