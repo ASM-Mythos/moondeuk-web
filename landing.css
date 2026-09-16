@@ -6,8 +6,10 @@
   --paper: #fdf8ee;
   --camel: #c0894a;
   --camel-dark: #9a6a30;
+  --camel-deep: #825722;          /* eyebrow 텍스트 — cream-dark 배경 대비 4.94:1 (WCAG AA) */
   --text-primary: #2f2616;
   --text-secondary: #8a7c64;
+  --text-secondary-strong: #796c54; /* 푸터 텍스트 — paper 배경 대비 4.86:1 (WCAG AA) */
   --divider: #efe7d6;
   --accent-pink: #e88f8f;
   --nav-h: 60px;
@@ -84,7 +86,7 @@ section {
   padding: 6px 14px;
   border-radius: 999px;
   background: var(--cream-dark);
-  color: var(--camel-dark);
+  color: var(--camel-deep);
   font-size: 14px;
   font-weight: 700;
 }
@@ -786,7 +788,7 @@ footer.site {
   padding: 36px 24px calc(48px + 74px);
   border-top: 1px solid var(--divider);
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--text-secondary-strong);
   background: var(--paper);
 }
 
@@ -806,7 +808,7 @@ footer.site nav {
 }
 
 footer.site a {
-  color: var(--text-secondary);
+  color: var(--text-secondary-strong);
 }
 
 /* 모바일 하단 고정 CTA */
