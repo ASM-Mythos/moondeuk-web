@@ -6,6 +6,9 @@
   <title>문득(Moondeuk) — 노션·PDF 노트를 잠금화면 복습 퀴즈로 만드는 자동 복습 앱</title>
   <meta name="description" content="노션 페이지나 PDF를 올리면 AI가 복습 퀴즈를 만들고, 망각곡선에 맞춰 잠금화면에서 잊을 때쯤 다시 보여줘요. 기록만 하고 다시 안 보는 당신을 위한 자동 복습 앱, 문득.">
   <link rel="canonical" href="https://moondeuk.kr/">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://us-assets.i.posthog.com" crossorigin>
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/app-icon.png">
 
@@ -17,7 +20,9 @@
   <meta property="og:image" content="https://moondeuk.kr/assets/hero-keyvisual.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <!-- 폰트 CSS 는 비동기 로드 — font-display: swap 이라 시스템 폰트로 먼저 그린다 (렌더 블로킹 1.9s 제거) -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"></noscript>
   <link rel="stylesheet" href="landing.css">
 
   <!-- FAQ 리치 결과용 구조화 데이터 -->
@@ -82,7 +87,7 @@
   <header class="nav">
     <div class="nav-inner">
       <a class="nav-brand" href="./">
-        <img src="assets/app-icon.png" alt="" width="28" height="28">
+        <img src="assets/app-icon-64.png" alt="" width="28" height="28">
         <span>문득</span>
       </a>
       <a id="cta-play-nav" class="btn-nav" href="#">앱 다운로드</a>
@@ -205,7 +210,7 @@
           <p>노션 페이지를 연결하거나 PDF·마크다운 파일을 올리면 끝. 정리하던 방식을 바꿀 필요 없어요.</p>
           <p class="demo-hint"><span class="dot"></span>실제로 눌러볼 수 있는 데모예요 — 화면 속 버튼으로 진행해보세요</p>
         </div>
-        <iframe class="step-demo" width="340" height="765" src="demo/quiz-creation.html"
+        <iframe class="step-demo" width="340" height="765" data-src="demo/quiz-creation.html"
                 title="문득 데모 — 화면 속 버튼을 눌러 AI 퀴즈 생성 과정을 직접 체험해보세요"
                 loading="lazy" scrolling="no"></iframe>
       </div>
@@ -219,7 +224,7 @@
           <h2>퀴즈는 문득이 만들어요</h2>
           <p>자료마다 나만의 문제집이 생겨요. 문제 만드느라 애쓸 필요 없어요.</p>
         </div>
-        <iframe class="screen-demo" width="340" height="680" src="demo/screen-home.html"
+        <iframe class="screen-demo" width="340" height="680" data-src="demo/screen-home.html"
                 title="자료마다 자동 생성된 나만의 문제집이 보이는 홈 화면"
                 loading="lazy" scrolling="no"></iframe>
       </div>
@@ -234,7 +239,7 @@
           <p>앱을 열 필요도, 복습 시간을 따로 낼 필요도 없어요. 폰을 켜는 순간이 복습 시간이 돼요.</p>
           <p class="demo-hint"><span class="dot"></span>실제로 풀어볼 수 있는 데모예요 — 정답을 직접 골라보세요</p>
         </div>
-        <iframe class="step-demo" width="340" height="765" src="demo/lockscreen.html"
+        <iframe class="step-demo" width="340" height="765" data-src="demo/lockscreen.html"
                 title="문득 데모 — 잠금화면 퀴즈를 직접 풀어보세요"
                 loading="lazy" scrolling="no"></iframe>
       </div>
@@ -269,7 +274,7 @@
     <!-- 아웃트로 CTA -->
     <section class="outro">
       <div class="section-inner reveal">
-        <iframe class="screen-demo final-demo" width="300" height="600" src="demo/screen-review.html"
+        <iframe class="screen-demo final-demo" width="300" height="600" data-src="demo/screen-review.html"
                 title="문제집에서 복습을 시작하는 화면"
                 loading="lazy" scrolling="no"></iframe>
         <h2>오늘 정리한 노트가,<br>내일의 기억이 되도록</h2>
@@ -329,6 +334,21 @@
   <div class="cta-bar">
     <a id="cta-play-bar" class="btn-store" href="#" rel="noopener">Google Play에서 받기</a>
   </div>
+
+  <!-- 데모 iframe 지연 로드 — 네이티브 lazy 는 선로드 마진이 커서 초기 로드에 전부 실렸다 -->
+  <script>
+    (function () {
+      var frames = Array.prototype.slice.call(document.querySelectorAll('iframe[data-src]'));
+      function load(f) { if (!f.src) f.src = f.getAttribute('data-src'); }
+      if (!('IntersectionObserver' in window)) { frames.forEach(load); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { load(e.target); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '400px 0px' });
+      frames.forEach(function (f) { io.observe(f); });
+    })();
+  </script>
 
   <!-- PostHog (앱과 동일 프로젝트 — 클라 공개 키) -->
   <script>
@@ -467,15 +487,16 @@
         if (reduced || !hasIO) return; // 곡선 즉시 완성, 카운터 33 유지
 
         var paths = chart.querySelectorAll('.c-decay, .c-keep');
-        paths.forEach(function (p) {
-          var len = p.getTotalLength();
+        // 읽기 일괄 → 쓰기 일괄 → 플러시 1회: path 마다 읽기·쓰기를 섞으면 강제 리플로우가 path 수만큼 난다
+        var lens = Array.prototype.map.call(paths, function (p) { return p.getTotalLength(); });
+        paths.forEach(function (p, i) {
           // 초기 세팅이 transition을 타지 않도록 잠시 끔
           p.style.transition = 'none';
-          p.style.strokeDasharray = len;
-          p.style.strokeDashoffset = len;
-          void p.getBoundingClientRect();
-          p.style.transition = '';
+          p.style.strokeDasharray = lens[i];
+          p.style.strokeDashoffset = lens[i];
         });
+        void chart.getBoundingClientRect();
+        paths.forEach(function (p) { p.style.transition = ''; });
         counter.textContent = '100';
 
         function animateCounter() {
