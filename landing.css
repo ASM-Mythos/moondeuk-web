@@ -107,6 +107,21 @@ h2 {
   transform: none;
 }
 
+/* 첫 화면(히어로) 등장 — JS reveal 로 게이트하면 스크립트 실행 전까지 LCP 텍스트가
+   opacity 0 으로 잡혀 렌더가 수 초 지연된다(느린 4G 실측 2.8s). CSS 만으로 즉시 재생 */
+.reveal-now {
+  animation: reveal-in 0.6s ease both;
+}
+
+@keyframes reveal-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-now { animation: none; }
+}
+
 /* 스티키 헤더 */
 .nav {
   position: fixed;
