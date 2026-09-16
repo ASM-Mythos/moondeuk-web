@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+# 데모 iframe 조각·구버전 약관은 색인 대상이 아니다
+Disallow: /demo/
+Disallow: /terms-20260731.html
+
+Sitemap: https://moondeuk.kr/sitemap.xml

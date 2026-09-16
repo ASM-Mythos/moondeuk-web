@@ -1,0 +1,28 @@
+# 문득 (Moondeuk)
+
+> 노션 페이지나 PDF·마크다운 노트를 올리면 AI가 퀴즈를 자동으로 만들고, 잊을 때쯤 잠금화면에서 다시 보여주는 자동 복습 앱(FSRS 간격 반복). Android·iOS 지원, 한국어 서비스.
+
+## 핵심 기능
+
+- 노션 연동·파일 업로드(PDF/마크다운)로 학습 자료를 가져오면 AI가 객관식 퀴즈를 자동 생성
+- FSRS 기반 간격 반복 스케줄링 — 문제마다 잊어갈 타이밍을 계산해 복습 큐에 올림
+- 잠금화면 복습 — 폰을 켤 때 잠금화면 위에 퀴즈 카드가 떠서 앱을 열지 않고 한 문제씩 풀 수 있음
+- 모의고사 — 문제집(폴더)을 골라 셔플된 시험 형태로 응시
+- 가격: 구독제(월 2,700원, 매월 크레딧 10개). 가입 시 무료 이용 기회 제공
+
+## 페이지
+
+- [홈·소개·FAQ](https://moondeuk.kr/): 서비스 소개, 작동 방식, 자주 묻는 질문
+- [이용약관](https://moondeuk.kr/terms.html)
+- [개인정보처리방침](https://moondeuk.kr/privacy.html)
+- [계정 삭제 안내](https://moondeuk.kr/account-deletion.html)
+
+## 다운로드
+
+- Google Play: https://play.google.com/store/apps/details?id=kr.moondeuk.app
+- App Store: https://apps.apple.com/kr/app/moondeuk/id6805761197 (iOS 17.2 이상)
+
+## 문의
+
+- 이메일: asm.mythos@gmail.com
+- 운영: ASM Mythos
