@@ -23,3 +23,7 @@ GitHub Pages(`main` 루트)로 서빙한다. 빌드 없음 — HTML/CSS 만.
 
 - 커스텀 도메인(moondeuk.kr) CNAME — DNS 등록 후 Pages 설정에 추가. URL 이 바뀌면 Play Console 폼도 갱신.
 - 개인정보처리방침 법적 검토.
+
+## 홍보 짧은 주소 (`/r1`, `/r2`, …)
+
+`404.html` 이 `/r<숫자>` 패턴을 잡아 기기별 스토어로 리다이렉트한다 (Android → Play + install referrer, iPhone → App Store + `ct` 캠페인 토큰, 그 외 → 랜딩). 새 코드는 배포 없이 바로 사용 — 어떤 코드가 어느 릴스/포스터인지는 노션 홍보 링크 표에서 관리. 이동 직전 PostHog `promo_redirect` 이벤트(code·target)를 남긴다. App Store 캠페인 집계는 `404.html` 의 `APPSTORE_PT`(프로바이더 토큰)를 채워야 활성화된다.
