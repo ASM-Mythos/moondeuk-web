@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>문득</title>
+  <style>
+    body { margin: 0; display: flex; align-items: center; justify-content: center;
+           min-height: 100vh; font-family: -apple-system, sans-serif; background: #FFF9F0; color: #6B4E2E; }
+  </style>
+</head>
+<body>
+  <p>이동 중이에요…</p>
+  <script>
+    (function () {
+      // 홍보 짧은 주소 리다이렉트 (r1, r2, …) — 새 코드는 배포 없이 바로 사용 가능.
+      // 어떤 코드가 어느 릴스/포스터인지는 노션 홍보 링크 표에서 관리한다.
+      var PLAY_ID = 'kr.moondeuk.app';
+      var APPSTORE_URL = 'https://apps.apple.com/kr/app/moondeuk/id6805761197';
+      var APPSTORE_PT = ''; // App Store Connect 프로바이더 토큰 — 채우면 캠페인(ct) 집계 활성화
+      var POSTHOG_KEY = 'phc_ydXLm5y7tezFjRpfz6T6Hrdb9xDqzFdciVScTXmZ4sEC';
+      var POSTHOG_HOST = 'https://us.i.posthog.com';
+
+      var m = location.pathname.match(/^\/(r\d+)\/?$/i);
+      if (!m) { location.replace('/'); return; }
+      var code = m[1].toLowerCase();
+
+      var ua = navigator.userAgent;
+      var target, url;
+      if (/android/i.test(ua)) {
+        target = 'play';
+        url = 'https://play.google.com/store/apps/details?id=' + PLAY_ID +
+              '&referrer=' + encodeURIComponent(
+                'utm_source=promo&utm_medium=short_link&utm_content=' + code);
+      } else if (/iphone|ipad|ipod/i.test(ua)) {
+        target = 'appstore';
+        url = APPSTORE_URL + '?ct=' + code + '&mt=8' + (APPSTORE_PT ? '&pt=' + APPSTORE_PT : '');
+      } else {
+        target = 'landing';
+        url = '/?utm_source=promo&utm_medium=short_link&utm_content=' + code;
+      }
+
+      // SDK 로드를 기다리지 않고 sendBeacon 으로 클릭 1발 기록 후 즉시 이동 —
+      // 리다이렉트 체감을 늦추지 않으면서 이탈 전 전송이 보장된다.
+      try {
+        var payload = JSON.stringify({
+          api_key: POSTHOG_KEY,
+          event: 'promo_redirect',
+          distinct_id: 'promo-' + Math.random().toString(36).slice(2) + Date.now().toString(36),
+          properties: {
+            code: code,
+            target: target,
+            $current_url: location.href,
+            $referrer: document.referrer || '$direct',
+            $lib: 'promo-redirect',
+          },
+          timestamp: new Date().toISOString(),
+        });
+        navigator.sendBeacon(POSTHOG_HOST + '/capture/', new Blob([payload], { type: 'application/json' }));
+      } catch (e) { /* 계측 실패는 이동을 막지 않는다 */ }
+
+      location.replace(url);
+    })();
+  </script>
+</body>
+</html>
