@@ -52,6 +52,12 @@
         <td>앱 사용 이벤트(화면 이동·기능 사용 등), 기기·앱 버전 정보</td>
         <td>앱 사용 시</td>
       </tr>
+      <tr>
+        <td>광고 성과 측정 정보</td>
+        <td>광고 식별자(Google 광고 ID), 앱 설치·실행, 회원 가입 완료·온보딩 완료 여부, 유료 결제 발생 여부와 금액·통화, 기기·앱 버전 정보<br>
+          <span class="muted">학습 자료·퀴즈 내용, 이름·이메일 등 계정 정보는 포함하지 않습니다. 기기의 광고 설정에서 광고 ID를 재설정하거나 삭제할 수 있습니다.</span></td>
+        <td>Android 앱 사용 시</td>
+      </tr>
     </table>
 
     <h2>2. 처리 목적</h2>
@@ -61,6 +67,7 @@
       <li>모의고사 등 학습 기능 제공</li>
       <li>인앱 결제 영수증 검증, 구독·크레딧 상태 관리 및 결제 관련 문의 대응</li>
       <li>서비스 이용 통계 분석과 품질 개선</li>
+      <li>앱 광고의 성과 측정(광고를 통한 설치·가입·결제 집계)과 광고 효율 개선</li>
     </ul>
 
     <h2>3. 보유·이용 기간</h2>
@@ -85,6 +92,7 @@
       <tr><td>PostHog, Inc.</td><td>앱·서버 사용 이벤트 수집·분석</td></tr>
       <tr><td>Microsoft Corporation (Clarity)</td><td>앱 화면 이용 기록(세션 리플레이·탭 히트맵) 수집·분석</td></tr>
       <tr><td>RevenueCat, Inc.</td><td>인앱 결제 영수증 검증, 구독·크레딧 구매 상태 관리</td></tr>
+      <tr><td>Meta Platforms, Inc.</td><td>앱 광고(Facebook·Instagram) 성과 측정 — 광고를 통한 설치·가입·결제 집계</td></tr>
       <tr><td>Functional Software, Inc. (Sentry)</td><td>서비스 오류 추적·복구</td></tr>
       <tr><td>LangChain, Inc. (LangSmith)</td><td>AI 퀴즈 생성 품질 모니터링을 위한 처리 기록 관리</td></tr>
     </table>
@@ -138,6 +146,14 @@
         <td>유료 서비스 결제·구독 상태 갱신 시점에 정보통신망을 통해 암호화(HTTPS) 전송</td>
         <td>인앱 결제 영수증 검증, 구독·크레딧 구매 상태 관리</td>
         <td>회원 탈퇴 시 파기</td>
+      </tr>
+      <tr>
+        <td>Meta Platforms, Inc.<br><span class="muted">문의: facebook.com/privacy/policy</span></td>
+        <td>미국</td>
+        <td>광고 식별자(Google 광고 ID), 앱 설치·실행, 회원 가입 완료·온보딩 완료 여부, 유료 결제 발생 여부와 금액·통화, 기기·앱 버전 정보<br><span class="muted">(학습 자료·퀴즈 내용, 계정 정보는 전송되지 않음)</span></td>
+        <td>Android 앱 사용 시점에 정보통신망을 통해 암호화(HTTPS) 전송</td>
+        <td>앱 광고 성과 측정 및 광고 효율 개선</td>
+        <td>광고 성과 측정 목적 달성 시까지<br><span class="muted">(Meta의 데이터 보관 정책에 따름)</span></td>
       </tr>
       <tr>
         <td>Functional Software, Inc. (Sentry)<br><span class="muted">문의: sentry.io/privacy</span></td>
@@ -200,9 +216,10 @@
       </ul>
     </div>
 
-    <p class="notice">2026년 9월 3일 개정 예정: 처리 위탁·국외 이전에 Microsoft Corporation(Clarity, 앱 화면 이용 기록) 추가.</p>
+    <p class="notice">2026년 9월 21일 개정: 앱 광고 성과 측정을 위해 처리 항목에 광고 성과 측정 정보, 처리 위탁·국외 이전에 Meta Platforms, Inc. 추가(Android 앱).</p>
+    <p class="notice">2026년 9월 3일 개정: 처리 위탁·국외 이전에 Microsoft Corporation(Clarity, 앱 화면 이용 기록) 추가.</p>
     <p class="notice">2026년 8월 28일 개정: 유료 서비스 출시에 따라 처리 항목에 결제 정보, 처리 위탁·국외 이전에 RevenueCat, Inc.(인앱 결제 영수증 검증·구독 상태 관리) 추가.</p>
-    <p class="notice">시행일: 2026년 9월 3일</p>
+    <p class="notice">시행일: 2026년 9월 21일</p>
 
     <footer class="site">© ASM Mythos · 문득 (Moondeuk) · <a href="terms.html">이용약관</a> · <a href="account-deletion.html">계정 삭제 안내</a></footer>
   </div>
