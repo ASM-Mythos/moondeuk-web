@@ -53,7 +53,10 @@
         var kind = inv[1].toLowerCase();
         var inviteCode = inv[2].toUpperCase();
         var invTarget, invUrl;
-        var playUrl = playBase + '&referrer=' + encodeURIComponent('utm_source=invite_link&utm_medium=' + kind);
+        // 리그 코드는 Play 설치 리퍼러에만 싣는다 — 앱이 첫 실행 때 읽어 로그인 뒤 참가 창을 연다(새로 설치한 친구도 링크 하나로 참가).
+        // 리퍼러는 Play·앱만 보고, PostHog 계측에는 싣지 않는다(앱의 first_open 도 utm 키만 보낸다).
+        var playUrl = playBase + '&referrer=' + encodeURIComponent(
+          'utm_source=invite_link&utm_medium=' + kind + (kind === 'league' ? '&league_code=' + inviteCode : ''));
         if (isAndroid) {
           invTarget = 'android_app';
           invUrl = 'intent://moondeuk.kr/' + kind + '/' + inviteCode +

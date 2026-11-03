@@ -35,5 +35,5 @@ GitHub Pages(`main` 루트)로 서빙한다. 빌드 없음 — HTML/CSS 만.
 - `.well-known/assetlinks.json` — Android App Links 검증. 패키지 `kr.moondeuk.app` + **Play 앱 서명 키** SHA-256(Play Console 딥 링크 페이지 값). 키가 바뀌면 지문도 바꾼다.
 - `.well-known/apple-app-site-association` — iOS Universal Links. 팀 `2Q38HCUQ68`, 경로 `/invite/*`·`/league/*`. 앱 entitlement `applinks:moondeuk.kr`.
 - `.nojekyll` — GitHub Pages(Jekyll)가 `.well-known` 같은 점 폴더를 빼지 않게 한다. 지우면 검증이 깨진다.
-- 앱이 없거나 인앱 브라우저라 링크가 사이트로 오면 `404.html` 이 처리: Android → `intent://` 로 앱을 직접 열고(없으면 Play), iPhone → App Store, 그 외 → 랜딩. PostHog `invite_link_redirect`(kind·target) — **초대 코드는 싣지 않는다**(비공개 리그 입장 열쇠).
+- 앱이 없거나 인앱 브라우저라 링크가 사이트로 오면 `404.html` 이 처리: Android → `intent://` 로 앱을 직접 열고(없으면 Play), iPhone → App Store, 그 외 → 랜딩. 리그 링크는 Play 설치 리퍼러에 `league_code` 를 실어, 새로 설치한 앱이 첫 실행 때 읽어 로그인 뒤 참가 창을 연다(Android 만 — App Store 엔 리퍼러가 없다). PostHog `invite_link_redirect`(kind·target) — **초대 코드는 싣지 않는다**(비공개 리그 입장 열쇠).
 - 검증 확인: `https://digitalassetlinks.googleapis.com/v1/statements:list?source.web.site=https://moondeuk.kr&relation=delegate_permission/common.handle_all_urls`, iOS 는 `https://app-site-association.cdn-apple.com/a/v1/moondeuk.kr`(애플 CDN 반영까지 시간 걸림).
