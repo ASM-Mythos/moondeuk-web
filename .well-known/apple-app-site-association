@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "2Q38HCUQ68.kr.moondeuk.app",
+        "appIDs": ["2Q38HCUQ68.kr.moondeuk.app"],
+        "paths": ["/invite/*", "/league/*"],
+        "components": [
+          { "/": "/invite/*", "comment": "친구 초대(크레딧) 링크" },
+          { "/": "/league/*", "comment": "리그 초대 링크" }
+        ]
+      }
+    ]
+  }
+}

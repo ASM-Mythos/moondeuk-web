@@ -27,3 +27,13 @@ GitHub Pages(`main` 루트)로 서빙한다. 빌드 없음 — HTML/CSS 만.
 ## 홍보 짧은 주소 (`/r1`, `/r2`, …)
 
 `404.html` 이 `/r<숫자>` 패턴을 잡아 기기별 스토어로 리다이렉트한다 (Android → Play + install referrer, iPhone → App Store + `ct` 캠페인 토큰, 그 외 → 랜딩). 새 코드는 배포 없이 바로 사용 — 어떤 코드가 어느 릴스/포스터인지는 노션 홍보 링크 표에서 관리. 이동 직전 PostHog `promo_redirect` 이벤트(code·target)를 남긴다. App Store 캠페인 집계는 `404.html` 의 `APPSTORE_PT`(프로바이더 토큰)를 채워야 활성화된다.
+
+## 앱 링크 (`/invite/{code}`, `/league/{code}`)
+
+`https://moondeuk.kr/invite/{code}`(친구 초대)·`https://moondeuk.kr/league/{code}`(리그 초대)를 누르면 앱이 깔려 있을 때 OS 가 이 사이트 대신 앱을 바로 연다.
+
+- `.well-known/assetlinks.json` — Android App Links 검증. 패키지 `kr.moondeuk.app` + **Play 앱 서명 키** SHA-256(Play Console 딥 링크 페이지 값). 키가 바뀌면 지문도 바꾼다.
+- `.well-known/apple-app-site-association` — iOS Universal Links. 팀 `2Q38HCUQ68`, 경로 `/invite/*`·`/league/*`. 앱 entitlement `applinks:moondeuk.kr`.
+- `.nojekyll` — GitHub Pages(Jekyll)가 `.well-known` 같은 점 폴더를 빼지 않게 한다. 지우면 검증이 깨진다.
+- 앱이 없거나 인앱 브라우저라 링크가 사이트로 오면 `404.html` 이 처리: Android → `intent://` 로 앱을 직접 열고(없으면 Play), iPhone → App Store, 그 외 → 랜딩. 리그 링크는 Play 설치 리퍼러에 `league_code` 를 실어, 새로 설치한 앱이 첫 실행 때 읽어 로그인 뒤 참가 창을 연다(Android 만 — App Store 엔 리퍼러가 없다). PostHog `invite_link_redirect`(kind·target) — **초대 코드는 싣지 않는다**(비공개 리그 입장 열쇠).
+- 검증 확인: `https://digitalassetlinks.googleapis.com/v1/statements:list?source.web.site=https://moondeuk.kr&relation=delegate_permission/common.handle_all_urls`, iOS 는 `https://app-site-association.cdn-apple.com/a/v1/moondeuk.kr`(애플 CDN 반영까지 시간 걸림).

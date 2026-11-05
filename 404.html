@@ -14,26 +14,81 @@
   <p>이동 중이에요…</p>
   <script>
     (function () {
-      // 홍보 짧은 주소 리다이렉트 (r1, r2, …) — 새 코드는 배포 없이 바로 사용 가능.
-      // 어떤 코드가 어느 릴스/포스터인지는 노션 홍보 링크 표에서 관리한다.
+      // 404 페이지가 경로 패턴별 리다이렉트를 맡는다 — 초대 링크(/league·/invite) · 홍보 짧은 주소(/r<n>) · 그 외는 홈.
       var PLAY_ID = 'kr.moondeuk.app';
       var APPSTORE_URL = 'https://apps.apple.com/kr/app/moondeuk/id6805761197';
       var APPSTORE_PT = ''; // App Store Connect 프로바이더 토큰 — 채우면 캠페인(ct) 집계 활성화
       var POSTHOG_KEY = 'phc_ydXLm5y7tezFjRpfz6T6Hrdb9xDqzFdciVScTXmZ4sEC';
       var POSTHOG_HOST = 'https://us.i.posthog.com';
 
+      function beacon(event, properties) {
+        // SDK 로드를 기다리지 않고 sendBeacon 으로 1발 기록 후 즉시 이동 —
+        // 리다이렉트 체감을 늦추지 않으면서 이탈 전 전송이 보장된다.
+        try {
+          // 호출부가 넘긴 $current_url·$lib 우선(초대 링크는 코드를 뺀 주소를 넘긴다)
+          if (!properties.$current_url) properties.$current_url = location.href;
+          properties.$referrer = document.referrer || '$direct';
+          var payload = JSON.stringify({
+            api_key: POSTHOG_KEY,
+            event: event,
+            distinct_id: 'promo-' + Math.random().toString(36).slice(2) + Date.now().toString(36),
+            properties: properties,
+            timestamp: new Date().toISOString(),
+          });
+          navigator.sendBeacon(POSTHOG_HOST + '/capture/', new Blob([payload], { type: 'application/json' }));
+        } catch (e) { /* 계측 실패는 이동을 막지 않는다 */ }
+      }
+
+      var ua = navigator.userAgent;
+      var isAndroid = /android/i.test(ua);
+      var isIos = /iphone|ipad|ipod/i.test(ua);
+      var playBase = 'https://play.google.com/store/apps/details?id=' + PLAY_ID;
+
+      // 초대 링크 (/league/{code}, /invite/{code}) — 앱이 깔려 있고 앱 링크가 검증되면 OS 가 이 페이지 없이 앱을 연다.
+      // 여기 왔다는 건 앱이 없거나 인앱 브라우저(카카오톡 등)라 앱 링크가 안 걸린 경우:
+      //   Android → intent:// 로 앱을 직접 열고(코드 그대로 전달), 앱이 없으면 Play 로 / iPhone → App Store / 그 외 → 랜딩.
+      // 초대 코드는 비공개 리그 입장 열쇠라 계측에 싣지 않는다.
+      var inv = location.pathname.match(/^\/(league|invite)\/([A-Za-z0-9]{4,12})\/?$/);
+      if (inv) {
+        var kind = inv[1].toLowerCase();
+        var inviteCode = inv[2].toUpperCase();
+        var invTarget, invUrl;
+        // 리그 코드는 Play 설치 리퍼러에만 싣는다 — 앱이 첫 실행 때 읽어 로그인 뒤 참가 창을 연다(새로 설치한 친구도 링크 하나로 참가).
+        // 리퍼러는 Play·앱만 보고, PostHog 계측에는 싣지 않는다(앱의 first_open 도 utm 키만 보낸다).
+        var playUrl = playBase + '&referrer=' + encodeURIComponent(
+          'utm_source=invite_link&utm_medium=' + kind + (kind === 'league' ? '&league_code=' + inviteCode : ''));
+        if (isAndroid) {
+          invTarget = 'android_app';
+          invUrl = 'intent://moondeuk.kr/' + kind + '/' + inviteCode +
+                   '#Intent;scheme=https;package=' + PLAY_ID +
+                   ';S.browser_fallback_url=' + encodeURIComponent(playUrl) + ';end';
+        } else if (isIos) {
+          invTarget = 'appstore';
+          invUrl = APPSTORE_URL + '?ct=invite_' + kind + '&mt=8' + (APPSTORE_PT ? '&pt=' + APPSTORE_PT : '');
+        } else {
+          invTarget = 'landing';
+          invUrl = '/?utm_source=invite_link&utm_medium=' + kind;
+        }
+        beacon('invite_link_redirect', {
+          kind: kind, target: invTarget, $lib: 'invite-redirect',
+          $current_url: location.origin + '/' + kind + '/',
+        });
+        location.replace(invUrl);
+        return;
+      }
+
+      // 홍보 짧은 주소 리다이렉트 (r1, r2, …) — 새 코드는 배포 없이 바로 사용 가능.
+      // 어떤 코드가 어느 릴스/포스터인지는 노션 홍보 링크 표에서 관리한다.
       var m = location.pathname.match(/^\/(r\d+)\/?$/i);
       if (!m) { location.replace('/'); return; }
       var code = m[1].toLowerCase();
 
-      var ua = navigator.userAgent;
       var target, url;
-      if (/android/i.test(ua)) {
+      if (isAndroid) {
         target = 'play';
-        url = 'https://play.google.com/store/apps/details?id=' + PLAY_ID +
-              '&referrer=' + encodeURIComponent(
+        url = playBase + '&referrer=' + encodeURIComponent(
                 'utm_source=promo&utm_medium=short_link&utm_content=' + code);
-      } else if (/iphone|ipad|ipod/i.test(ua)) {
+      } else if (isIos) {
         target = 'appstore';
         url = APPSTORE_URL + '?ct=' + code + '&mt=8' + (APPSTORE_PT ? '&pt=' + APPSTORE_PT : '');
       } else {
@@ -41,25 +96,7 @@
         url = '/?utm_source=promo&utm_medium=short_link&utm_content=' + code;
       }
 
-      // SDK 로드를 기다리지 않고 sendBeacon 으로 클릭 1발 기록 후 즉시 이동 —
-      // 리다이렉트 체감을 늦추지 않으면서 이탈 전 전송이 보장된다.
-      try {
-        var payload = JSON.stringify({
-          api_key: POSTHOG_KEY,
-          event: 'promo_redirect',
-          distinct_id: 'promo-' + Math.random().toString(36).slice(2) + Date.now().toString(36),
-          properties: {
-            code: code,
-            target: target,
-            $current_url: location.href,
-            $referrer: document.referrer || '$direct',
-            $lib: 'promo-redirect',
-          },
-          timestamp: new Date().toISOString(),
-        });
-        navigator.sendBeacon(POSTHOG_HOST + '/capture/', new Blob([payload], { type: 'application/json' }));
-      } catch (e) { /* 계측 실패는 이동을 막지 않는다 */ }
-
+      beacon('promo_redirect', { code: code, target: target, $lib: 'promo-redirect' });
       location.replace(url);
     })();
   </script>

@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "kr.moondeuk.app",
+      "sha256_cert_fingerprints": [
+        "B6:04:02:4D:5E:91:5C:6E:F3:CE:CE:77:1B:A0:78:7F:6A:87:1C:CC:FB:A2:E8:08:C8:CC:C2:63:D7:FB:C3:BC"
+      ]
+    }
+  }
+]
